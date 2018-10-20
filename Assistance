@@ -1,0 +1,76 @@
+import java.util.*;
+public class DetIncredibles {
+
+	public static void main(String[] args) {
+		ArrayList<ArrayList<Object>> outerList= new ArrayList<ArrayList<Object>>();
+		outerList.add( new ArrayList<Object>()); //in fact a new List is added inside your outerList!
+		Scanner sc=new Scanner(System.in);
+		String name,ap; // no need for ap1,ap2..apn. 
+		int n1=0;
+		int n2=0;
+		int b;
+		int inner=1; //counts inner lists
+		Object data;
+		do {
+			//First printing out a menu
+			System.out.println("What do you want to do?");
+			System.out.println("1.Add");
+			System.out.println("2.Remove");
+			System.out.println("3.Print everything");
+			System.out.println("4.Exit");
+			b=sc.nextInt();
+			// An if statement to find out what the user actually wants
+			if(b == 1) {
+				System.out.println("Would you like to add a column?Y/N");
+				ap=sc.next();
+				if (ap.equals("Y")) {  //You cannot compare Strings like this: ap=="Y"..use the equals function instead
+					outerList.add( new ArrayList<Object>()); //in fact a new List is added inside your outerList!
+					inner++;
+					System.out.println("Give name:");
+					name=sc.next();
+					outerList.get(0).add(name);//You shouldn't have done this -> outerList.add(name). In your outerList you can ONLY ADD NEW LISTS , NOT VARIABLES! Variables are added ONLY ON THE INNER LISTS!		
+				}
+				if (outerList.get(0).size() > 0) { //it is essential to check if there is at least one inner list (which means that at list one field exists)
+					System.out.println("Would you like to add information?Y/N");
+					String ap1=sc.next();
+					if (ap1.equals("Y")) {
+						System.out.println("In which column would you like to add it?");
+						System.out.println(outerList.get(0)); //prints all the fields	
+						int colu=sc.nextInt();
+						System.out.println("Add whatever you want to store");
+						data = sc.next(); // το γυρναει σε String , οποτε εχουμε ενα θεμα εδω
+						outerList.get(colu).add(data); //data was stored where the user wanted it to.	
+						for (int i = 1 ; i<outerList.size() ; i++ ) {
+							System.out.println(outerList.get(0).get(i-1));
+							System.out.println(outerList.get(i));
+						}
+				
+					}
+				}
+			}
+			else if(b ==2) {
+					System.out.println("Would you like to remove an item?Y/N");
+					ap=sc.next();
+					if (ap.equals("Y")) {
+						System.out.println("From which column?");
+						System.out.println(outerList.get(0)); //prints all the column's names also known as the fields
+						int colu=sc.nextInt();
+						System.out.println("Which item?");
+						System.out.println(outerList.get(colu-1));
+						int item = sc.nextInt();
+						outerList.get(colu-1).remove(item-1);
+					}
+				} else if (b == 3) {
+					for (int i = 1 ; i<outerList.size() ; i++ ) {
+						System.out.println(outerList.get(0).get(i-1));
+						System.out.println(outerList.get(i));
+					}
+				}else {
+				break;
+			}
+
+		}while (true);
+		System.out.println("Thanks for keeping me up to date");
+
+	}
+}
