@@ -1,6 +1,6 @@
 */ Προσπάθησα ο κώδικας να μην αλλαχτεί όπου δεν απαιτείται , προκειμένου να ταιριάζει στο στυλ του κώδικα της Αννα Μαρίας.
 
-import java.util.*;
+<font color="green"> import </font> java.util.*;
 public class DetIncredibles {
 
 	public static void main(String[] args) {
