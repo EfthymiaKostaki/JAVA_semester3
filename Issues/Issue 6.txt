@@ -1,0 +1,2 @@
+Η εντολή jar -cf Database.jar *.java στο command line θα δημιουργησει ενα jar με ονομα Database που θα περιεχει ολα τα .java αρχεια μεσα
+Η εντολη αυτη θα δοθει στο directory που περιεχει τα .java που χρειαζομαστε
