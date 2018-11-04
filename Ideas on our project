@@ -1,5 +1,5 @@
  Put assertions and Exceptions in our code
- For different types use instance of
- Put sql procedures in our java project
+ For different types use instanceof
+ Put sql procedures in our java project 
  We will not need dependencies 
  Use diagrams after processing a table 
