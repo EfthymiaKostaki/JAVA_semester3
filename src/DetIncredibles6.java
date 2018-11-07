@@ -144,7 +144,7 @@ public class DetIncredibles6 {
 		if (option == 0) {
 			// Create a JList
 			JList<Object> jlist = new JList<Object>(arr.toArray());
-			jlist.setBounds(100, 100, 75, 75); // Put some horizontal and verticals scroll bars)
+			jlist.setBounds(100, 100, 75, 75); // @Theodosis remember to add some horizontal and vertical scrollbars
 			jlist.setSize(200, 200);
 			JFrame displayFrame = new JFrame("This is your database");
 			displayFrame.setSize(800, 800);
@@ -168,7 +168,7 @@ public class DetIncredibles6 {
 
 			JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); 
 			// Adding the entries into the combobox
-			// The .toArray() is putting them in diffrente arrays. Otherwise they go to the same array
+			// The .toArray() is putting them in diffrent arrays. Otherwise they will appear in the same line
 			// The first line (fields) is ommited
 			combo.setBounds(50, 50, 220, 20);
 			frame2.add(combo);
