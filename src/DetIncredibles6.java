@@ -2,12 +2,12 @@ import java.util.*;
 import java.util.Date; // So as to understand that we are not calling java.sql.Date
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.Color; // Put some colour into JComboBox (when we edits - option 2
+import java.awt.Color; // Put some colour into JComboBox (when we edit - option 2)
 import java.io.File;
 import java.sql.*;
 
 public class DetIncredibles6 {
-	ArrayList<ArrayList<Object>> arr = new ArrayList<>(); // Think about it as a vektor which is composed by others vektors which are fluctuated dynamically...
+	ArrayList<ArrayList<Object>> arr = new ArrayList<>(); // Think of it as a vector which is composed by other vectors that are fluctuated dynamically...
 	
 	protected Object inputElements;
 	protected int entriesSelected, numberOfFields, i, rows;
@@ -81,7 +81,7 @@ public class DetIncredibles6 {
 		frame.setVisible(false); // Hiding the frame temporarily
 
 		if (entriesSelected == 1) { // If it is the firt time , then you have to name the fields before inserting an
-									// actual entry aka "dwse titlo se katheti"
+					   // actual entry aka "dwse titlo se katheti"
 
 			JOptionPane.showConfirmDialog(null,
 					"Please name the fields you intend to add (eg. 'name','address','phone' etc)\n", "Title",
@@ -218,9 +218,7 @@ public class DetIncredibles6 {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					arr.remove(combo.getSelectedIndex() + 1); // Removes the selected item from the array
-					combo.removeItemAt(combo.getSelectedIndex()); // Removes the deleted entry immediately from the
-																	// ComboBox as well
-					
+					combo.removeItemAt(combo.getSelectedIndex()); // Removes the deleted entry immediately from the ComboBox as well
 					System.out.println(arr);
 				}
 			});
