@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.Date; //για να μην ερχεται σε συγκρουση με java.sql.Date
+import java.util.Date; //So as to understand that we are not calling java.sql.Date
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Color; //να βάλουμε λιγο χρωμα στο JComboBox (οταν κανουμε τα edits - επιλογη 2
