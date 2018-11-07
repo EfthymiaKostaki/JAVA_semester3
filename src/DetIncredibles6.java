@@ -168,19 +168,10 @@ public class DetIncredibles6 {
 			frame2.setLayout(null);
 			frame2.setVisible(true);
 
-			JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); // προσθέτω τα πεδία
-																									// (fields) σε
-																									// ComboBox || εάν
-																									// δεν μπει
-																									// .toArray() τοτε
-																									// εμφανιζονται ολα
-																									// μαζι στην ιδια
-																									// γραμμη ||
-																									// Δεν
-																									// συμπεριλαμβανεται
-																									// η πρωτη λιστα
-																									// γιατι εχει τα
-																									// πεδια
+			JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); 
+			// προσθέτω σε combobox τους entries
+			// το .toArray() τα βάζει σε ξεχωριστες γραμμες. Αλλιως μπαινουν στην ιδια
+			//η πρωτη γραμμη (fields) φυσικα παραλειπεται
 			combo.setBounds(50, 50, 220, 20);
 			frame2.add(combo);
 			combo.setEditable(false);
@@ -214,14 +205,9 @@ public class DetIncredibles6 {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int chosenItem = combo.getSelectedIndex() + 1; // chosenItem > 0
-					combo2.setModel(new DefaultComboBoxModel<Object>(arr.get(chosenItem).toArray())); // the user chose
-																										// to edit a
-																										// certain
-																										// entry.Now he
-																										// can chose a
-																										// certain
-																										// element of
-																										// this entry
+					combo2.setModel(new DefaultComboBoxModel<Object>(arr.get(chosenItem).toArray()));
+					//the user chose to edit a certain entry. Now he can choose a certain element of the entryy
+					
 					frame3.add(combo2);
 					frame3.setVisible(true);
 				}
@@ -260,12 +246,9 @@ public class DetIncredibles6 {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					inputElements = JOptionPane.showInputDialog(frame3, "Edit this element:");
-					arr.get(combo.getSelectedIndex() + 1).set(combo2.getSelectedIndex(), inputElements); // replacing
-																											// the
-																											// selected
-																											// element
-																											// with the
-																											// new one
+					arr.get(combo.getSelectedIndex() + 1).set(combo2.getSelectedIndex(), inputElements);
+					//replacing the selected element with the new one
+
 					combo.setModel(new DefaultComboBoxModel<Object>(arr.subList(1,arr.size()).toArray())); //immediately updating combo
 					combo2.setModel(new DefaultComboBoxModel<Object>(arr.get(combo.getSelectedIndex() + 1).toArray())); //immediately updating combo2
 					System.out.println(arr);
@@ -290,14 +273,8 @@ public class DetIncredibles6 {
 	public ArrayList<ArrayList<Object>> getArray() {
 		return arr;
 	}
-
-	/*
-	 * public static String calculateMemory() { //την εχω γράψει για να τρέξω εγώ
-	 * κάποια τεστ μνήμης
-	 * 
-	 * double mb = Math.pow(1024, 2); Runtime runtime = Runtime.getRuntime(); return
-	 * ("Used memory: " + (runtime.totalMemory() - runtime.freeMemory()) / mb); }
-	 */
-
-
+	
+	public static void main(String[] args) {
+		new DetIncredibles6();
+	}
 }
