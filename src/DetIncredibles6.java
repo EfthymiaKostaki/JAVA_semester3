@@ -221,7 +221,7 @@ public class DetIncredibles6 {
 			frame2.add(generalbutton);
 
 			JButton deletebutton = new JButton("Delete this field");
-			deletebutton.addActionListener(new ActionListener() { // inner class in order to delete
+			deletebutton.addActionListener(new ActionListener() { // Inner class in order to delete
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (arr.size() > 1) { //arr.size() is at least 1 because of the fields. In order to delete something, though, the size has to be > 1 
