@@ -1,0 +1,40 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>gr.detIncredibles.app</groupId>
+<artifactId>Database</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>Database</name>
+<dependencies>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.12</version>
+		<scope>test</scope>
+	</dependency>
+	<!--https://mvnrepository.com/artifact/com.google.code.findbugs/findbugs -->
+	<dependency>
+		<groupId>com.google.code.findbugs</groupId>
+		<artifactId>findbugs</artifactId>
+		<version>3.0.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle -->
+	<dependency>
+		<groupId>com.puppycrawl.tools</groupId>
+		<artifactId>checkstyle</artifactId>
+		<version>8.14</version>
+	</dependency>
+</dependencies>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.3</version>
+			<configuration>
+				<source>1.5</source>
+				<target>1.5</target>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+</project>
