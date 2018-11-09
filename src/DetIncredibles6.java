@@ -130,9 +130,16 @@ public class DetIncredibles6 {
 		} // End if (entriesSelected==1)
 
 		for (i = 0; i < arr.get(0).size(); i++) { // arr.get(0).size() is the number of fields inserted previously
+			for(;;) {
 			inputElements = JOptionPane.showInputDialog(null, "Insert here:", "Add " + arr.get(0).get(i),
 					JOptionPane.OK_CANCEL_OPTION);
-			arr.get(rows).add(inputElements);
+				if (inputElements.toString() != null && !inputElements.toString().isEmpty()) {
+					arr.get(rows).add(inputElements);
+					break;
+				} else {
+					JOptionPane.showMessageDialog(null, "It can't be empty!");
+				}
+			}
 		}
 
 		int option = JOptionPane.showConfirmDialog(null,
@@ -217,9 +224,14 @@ public class DetIncredibles6 {
 			deletebutton.addActionListener(new ActionListener() { // Inner class in order to delete
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					arr.remove(combo.getSelectedIndex() + 1); // Removes the selected item from the array
-					combo.removeItemAt(combo.getSelectedIndex()); // Removes the deleted entry immediately from the ComboBox as well
-					System.out.println(arr);
+					if (arr.size() > 1) { //arr.size() is at least 1 because of the fields. In order to delete something, though, the size has to be > 1 
+					arr.remove(combo.getSelectedIndex() + 1); // removes the selected item from the array
+					combo.removeItemAt(combo.getSelectedIndex()); // removes the deleted entry immediately from the
+																	// ComboBox as well
+					rows--;
+					} else {
+						JOptionPane.showMessageDialog(null, "There is nothing to actually delete!");
+					}
 				}
 			});
 			deletebutton.setBounds(280, 200, 150, 20);
