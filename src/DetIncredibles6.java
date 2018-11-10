@@ -248,7 +248,7 @@ public class DetIncredibles6 {
 
 			JButton editbutton2 = new JButton("Edit this field");
 			editbutton2.addActionListener(new ActionListener() { // Inner class in order to edit
-				public void s() {
+				public void actionPerformed(ActionEvent e) {
 					inputElements = JOptionPane.showInputDialog(frame3, "Edit this element:");
 					arr.get(combo.getSelectedIndex() + 1).set(combo2.getSelectedIndex(), inputElements);
 					// Replacing the selected element with the new one
@@ -257,11 +257,6 @@ public class DetIncredibles6 {
 					combo2.setModel(new DefaultComboBoxModel<Object>(arr.get(combo.getSelectedIndex() + 1).toArray())); // Immediately updating combo2
 					System.out.println(arr);
 
-				}
-
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
 				}
 			}); // End of inner class of frame3 editbutton2
 			editbutton2.setBounds(280, 150, 150, 20);
