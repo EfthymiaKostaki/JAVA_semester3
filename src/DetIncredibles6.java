@@ -248,7 +248,7 @@ public class DetIncredibles6 {
 
 			JButton editbutton2 = new JButton("Edit this field");
 			editbutton2.addActionListener(new ActionListener() { // Inner class in order to edit
-				public void s() {
+				public void actionPerformed(ActionEvent e) {
 					inputElements = JOptionPane.showInputDialog(frame3, "Edit this element:");
 					arr.get(combo.getSelectedIndex() + 1).set(combo2.getSelectedIndex(), inputElements);
 					// Replacing the selected element with the new one
