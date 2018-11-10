@@ -7,7 +7,7 @@ import java.io.File;
 import java.sql.*;
 
 public class DetIncredibles6 {
-	ArrayList<ArrayList<Object>> arr = new ArrayList<>(); // Think of it as a vector which is composed by other vectors that are fluctuated dynamically...
+	ArrayList<ArrayList<Object>> arr = new ArrayList<ArrayList<Object>>(); // Think of it as a vector which is composed by other vectors that are fluctuated dynamically...
 	
 	protected Object inputElements;
 	protected int entriesSelected, numberOfFields, i, rows;
@@ -46,7 +46,6 @@ public class DetIncredibles6 {
 
 		okbutton = new JButton("OK");
 		okbutton.addActionListener(new ActionListener() { // Start of inner class
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (option1.isSelected()) { // If option1 is selected, the rest happen:
 					arr.add(new ArrayList<Object>()); // Adding another row
@@ -167,13 +166,13 @@ public class DetIncredibles6 {
 		if (entriesSelected > 0) { // Editing does not make sense if there are no entries!
 			frame.setVisible(false); // Hiding the first frame
 			// Creating a second frame (while the first one is of course hidden)
-			JFrame frame2 = new JFrame();
+			final JFrame frame2 = new JFrame();
 			frame2.setSize(500, 500);
 			frame2.setLocation(650, 300);
 			frame2.setLayout(null);
 			frame2.setVisible(true);
 
-			JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); 
+			final JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); 
 			// Adding the entries into the combobox
 			// The .toArray() is putting them in diffrent arrays. Otherwise they will appear in the same line
 			// The first line (fields) is ommited
@@ -189,14 +188,14 @@ public class DetIncredibles6 {
 			frame2.add(text); // Question added to frame2
 
 			// This will be used inside the JComboBox ActionListener
-			JFrame frame3 = new JFrame();
+			final JFrame frame3 = new JFrame();
 			frame3.setSize(500, 500);
 			// frame3.setLocation(1150,300);
 			frame3.setLocationRelativeTo(frame2);
 			frame3.setLayout(null);
 			frame3.setVisible(false); // It will be visible as soon as it is needed
 
-			JComboBox<Object> combo2 = new JComboBox<Object>(); // It will be used in frame3
+			final JComboBox<Object> combo2 = new JComboBox<Object>(); // It will be used in frame3
 			combo2.setBounds(50, 50, 180, 20);
 			combo2.setEditable(false);
 			combo2.setMaximumRowCount(10); // 10 rows will be displayed at first - scroll for the rest
@@ -207,7 +206,6 @@ public class DetIncredibles6 {
 
 			JButton generalbutton = new JButton("Edit this field");
 			generalbutton.addActionListener(new ActionListener() { // Inner class in order to edit
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					int chosenItem = combo.getSelectedIndex() + 1; // chosenItem > 0
 					combo2.setModel(new DefaultComboBoxModel<Object>(arr.get(chosenItem).toArray()));
@@ -222,7 +220,6 @@ public class DetIncredibles6 {
 
 			JButton deletebutton = new JButton("Delete this field");
 			deletebutton.addActionListener(new ActionListener() { // Inner class in order to delete
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (arr.size() > 1) { //arr.size() is at least 1 because of the fields. In order to delete something, though, the size has to be > 1 
 					arr.remove(combo.getSelectedIndex() + 1); // removes the selected item from the array
@@ -239,7 +236,7 @@ public class DetIncredibles6 {
 
 			JButton menubutton = new JButton("Back to Menu");
 			menubutton.addActionListener(new ActionListener() {
-				@Override
+			
 				public void actionPerformed(ActionEvent e) {
 					frame3.setVisible(false);
 					frame2.setVisible(false);
@@ -251,7 +248,6 @@ public class DetIncredibles6 {
 
 			JButton editbutton2 = new JButton("Edit this field");
 			editbutton2.addActionListener(new ActionListener() { // Inner class in order to edit
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					inputElements = JOptionPane.showInputDialog(frame3, "Edit this element:");
 					arr.get(combo.getSelectedIndex() + 1).set(combo2.getSelectedIndex(), inputElements);
