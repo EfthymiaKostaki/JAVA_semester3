@@ -258,11 +258,6 @@ public class DetIncredibles6 {
 					System.out.println(arr);
 
 				}
-
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
 			}); // End of inner class of frame3 editbutton2
 			editbutton2.setBounds(280, 150, 150, 20);
 			frame3.add(editbutton2);
