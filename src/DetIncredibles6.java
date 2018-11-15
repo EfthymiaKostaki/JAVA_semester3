@@ -176,9 +176,6 @@ public class DetIncredibles6 {
 			frame2.setVisible(true);
 
 			JComboBox<Object> combo = new JComboBox<Object>(arr.subList(1, arr.size()).toArray()); 
-			// προσθέτω σε combobox τους entries
-			// το .toArray() τα βάζει σε ξεχωριστες γραμμες. Αλλιως μπαινουν στην ιδια
-			//η πρωτη γραμμη (fields) φυσικα παραλειπεται
 			combo.setBounds(50, 50, 220, 20);
 			frame2.add(combo);
 			combo.setEditable(false);
