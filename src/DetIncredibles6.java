@@ -1,8 +1,8 @@
 import java.util.*;
-import java.util.Date; //για να μην ερχεται σε συγκρουση με java.sql.Date
+import java.util.Date;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.*; //να βάλουμε λιγο χρωμα στο JComboBox (οταν κανουμε τα edits - επιλογη 2
+import java.awt.*; 
 import java.io.File;
 import javafx.*;
 
