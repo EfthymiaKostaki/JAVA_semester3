@@ -3,3 +3,4 @@ os:
   - linux
   - osx
 sudo: false
+mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
