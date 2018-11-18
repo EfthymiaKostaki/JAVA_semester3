@@ -2,8 +2,3 @@ language: java
 os:
   - linux
   - osx
-jdk:
-- oraclejdk8
-- oraclejdk9
-
-mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
