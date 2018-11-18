@@ -2,3 +2,4 @@ language: java
 os:
   - linux
   - osx
+sudo: false
