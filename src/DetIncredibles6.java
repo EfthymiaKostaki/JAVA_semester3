@@ -151,7 +151,7 @@ public class DetIncredibles6 {
 				for(;;) {
 				inputElements = JOptionPane.showInputDialog(null, "Insert here:", "Add " + arr.get(0).get(i),
 						JOptionPane.OK_CANCEL_OPTION);
-					if (inputElements.toString() != null && !inputElements.toString().isEmpty()) {
+					if ((inputElements!= null) && (!( inputElements.toString().isEmpty()))) {
 						arr.get(rows).add(inputElements);
 						break;
 					} else {
