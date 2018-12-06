@@ -31,6 +31,14 @@ public class TableMenu{
 		} else if (choice == 1) {
 			System.out.println("You are making the system heavier..ehh! Just give me the field name");
 			table.addField(new Field(input.next()));
+			System.out.println("Do you want to add another one?Y/N");
+			String a=input.next();
+			while (a=="Y") {
+				System.out.println("You are making the system heavier..ehh! Just give me the field name");
+				table.addField(new Field(input.next()));
+				System.out.println("Do you want to add another one?Y/N");
+				a=input.next();
+			}
 		} else if (choice == 2) {
 			if (table.getFields().size() > 0) {
 				System.out.println(table.getFields());
