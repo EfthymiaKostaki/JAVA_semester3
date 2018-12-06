@@ -31,14 +31,6 @@ public class TableMenu{
 		} else if (choice == 1) {
 			System.out.println("You are making the system heavier..ehh! Just give me the field name");
 			table.addField(new Field(input.next()));
-			System.out.println("Do you want to add another one?Y/N");
-			String a=input.next();
-			while (a=="Y") {
-				System.out.println("You are making the system heavier..ehh! Just give me the field name");
-				table.addField(new Field(input.next()));
-				System.out.println("Do you want to add another one?Y/N");
-				a=input.next();
-			}
 		} else if (choice == 2) {
 			if (table.getFields().size() > 0) {
 				System.out.println(table.getFields());
@@ -49,14 +41,6 @@ public class TableMenu{
 			for (int i = 0; i<Field.fieldsCounter; i++) {
 				System.out.println("Please insert the " + table.getField(i) + ":");
 				entryArguements.add(input.next());
-				System.out.println("Do you want to add another one?Y/N");
-				String a=input.next();
-				while (a=="Y") {
-					System.out.println("Please insert the " + table.getField(i) + ":");
-					entryArguements.add(input.next());
-					System.out.println("Do you want to add another one?Y/N");
-					a=input.next();
-				}
 			}
 			table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
 			entryArguements.clear();
