@@ -49,6 +49,14 @@ public class TableMenu{
 			for (int i = 0; i<Field.fieldsCounter; i++) {
 				System.out.println("Please insert the " + table.getField(i) + ":");
 				entryArguements.add(input.next());
+				System.out.println("Do you want to add another one?Y/N");
+				String a=input.next();
+				while (a=="Y") {
+					System.out.println("Please insert the " + table.getField(i) + ":");
+					entryArguements.add(input.next());
+					System.out.println("Do you want to add another one?Y/N");
+					a=input.next();
+				}
 			}
 			table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
 			entryArguements.clear();
