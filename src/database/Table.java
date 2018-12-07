@@ -27,8 +27,8 @@ public class Table {
 		return entries;
 	}
 	
-	public String getField(int i) {
-		return fields.get(i).toString();
+	public Field getField(int i) {
+		return fields.get(i);
 	}
 	
 	public ArrayList<Field> getFields(){
