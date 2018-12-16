@@ -3,13 +3,24 @@ package database;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+* Contains methods to print menu and get information on users decisions.
+*
+*@author DetIncredibles6
+*@version 1.0
+*@since 1/12/2018
+*/
 public class TableMenu{
 	private ArrayList<Object> entryArguements = new ArrayList<Object>();
-	
+	/** 
+	*Constructor for TableMenu
+	*/
 	public TableMenu() {
 		
 	}
-		
+	/**
+	*Method to print out menun in screen
+	*/
 	public void showMenu() {
 		System.out.println("**This is the menu**");	
 		System.out.println("0) Exit!");
@@ -19,9 +30,11 @@ public class TableMenu{
 		System.out.println("4) Show entries");
 		System.out.println("Make a choice please:");
 	}
-		
+	/*Creates a new Table object*/
 	Table table = new Table();
-	
+	/**
+	*Contains the activities to be done based on user's decision.
+	*/
 	public int decider() {
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
