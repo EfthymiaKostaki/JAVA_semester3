@@ -12,8 +12,8 @@ import java.util.Scanner;
 class TestEntry {
 		private static Scanner input = new Scanner(System.in);
 		private static ArrayList<Object> entryArguements;
-		private Object firstElement = 5;
-		private Object missingElement = 15;
+		private static Object firstElement = 5;
+		private static Object missingElement = 15;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -36,18 +36,31 @@ class TestEntry {
 				entryArguements.contains(firstElement));
         Assert.assertFalse("failure - contains missing element",
         		entryArguements.contains(missingElement ));
+        final Object secondElement = 1000;
+        entryArguements.add(secondElement);
+        Assert.assertEquals("failure - wrong size", entryArguements.size(), 2);
+        Assert.assertEquals("failure - wrong head", entryArguements.get(entryArguements.size() - 1),
+                (Object)secondElement);
+        Assert.assertTrue("failure - does not contain first element",
+                entryArguements.contains(firstElement));
+        Assert.assertTrue("failure - does not contain second element",
+                entryArguements.contains(secondElement));
+        Assert.assertFalse("failure - contains missing element",
+                entryArguements.contains(missingElement));
 	}
 	
 
     @Test
     public void testToString() {
+    	entryArguements.add(firstElement);
         Assert.assertEquals("failure - wrong to String", entryArguements.toString(),
                 (firstElement).toString());
         final Object secondElement = 1000;
         entryArguements.add(secondElement);
         Assert.assertEquals("failure - wrong to String", entryArguements.toString(),
                 (secondElement).toString() + " -> " +
-                (firstElement).toString());
+                ((Integer) firstElement).toString());
     }
 
 }
+
