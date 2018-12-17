@@ -32,4 +32,8 @@ public class Field {
 		return fieldName.toString();
 	}
 	
+	public static int getFieldsCounter() {
+		return fieldsCounter;
+	}
+	
 }
