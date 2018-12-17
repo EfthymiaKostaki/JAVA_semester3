@@ -29,8 +29,6 @@ class TestEntry {
 	
 	@Test
 	void testConstructor() {
-		Assert.assertEquals("failure - wrong size", entryArguements.size(), 1);
-		entryArguements.add(1);
 		Assert.assertEquals("failure - wrong size", entryArguements.size(), 2);
 		Assert.assertTrue("failure - does not contain first element",
 				entryArguements.contains(firstElement));
@@ -38,7 +36,7 @@ class TestEntry {
         		entryArguements.contains(missingElement ));
         final Object secondElement = 1000;
         entryArguements.add(secondElement);
-        Assert.assertEquals("failure - wrong size", entryArguements.size(), 2);
+        Assert.assertEquals("failure - wrong size", entryArguements.size(), 3);
         Assert.assertEquals("failure - wrong head", entryArguements.get(entryArguements.size() - 1),
                 (Object)secondElement);
         Assert.assertTrue("failure - does not contain first element",
@@ -54,13 +52,12 @@ class TestEntry {
     public void testToString() {
     	entryArguements.add(firstElement);
         Assert.assertEquals("failure - wrong to String", entryArguements.toString(),
-                (firstElement).toString());
+                ("[" + (Integer) firstElement).toString() + "]");
         final Object secondElement = 1000;
         entryArguements.add(secondElement);
         Assert.assertEquals("failure - wrong to String", entryArguements.toString(),
-                (secondElement).toString() + " -> " +
-                ((Integer) firstElement).toString());
+                ("[" + (Integer) firstElement).toString()+ ", " +
+                 (secondElement).toString() + "]");
     }
 
 }
-
