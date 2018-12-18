@@ -34,11 +34,12 @@ public class TableMenu{
 	Table table = new Table();
 	/**
 	*Contains the activities to be done based on user's decision.
+	@param choice keeps in number form the choice of user
+	@return the choice it was made
 	*/
 	public int decider() {
 		/** Creates a Scanner object*/
 		Scanner input = new Scanner(System.in);
-		/**keeps in number form the choice of user*/
 		int choice = input.nextInt();
 		if (choice == 0) {
 			runTests();
