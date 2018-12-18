@@ -14,16 +14,21 @@ public class Field {
 	public Field() {
 		
 	}
-	/**Class Constructor for certain fieldName*/
+	/**Class Constructor for certain fieldName
+	*@param fieldName
+	*/
 	public Field(Object fieldName) {
 		this.fieldName = fieldName;
 		fieldsCounter++;
 	}
-	/** Getter for Field names*/
+	/** Getter for Field names
+	*@return fields name
+	*/
 	public Object getFieldName() {
 		return fieldName;
 	}
-	/** Setter for Field name*/
+	/** Setter for Field name
+	*/
 	public void setFieldName(Object name) {
 		this.fieldName = name;
 	}
