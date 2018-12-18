@@ -3,6 +3,11 @@ package database;
 import java.util.ArrayList;
 /**
 * Edits the Table which contains all the objects the user entered.
+*
+*@author DetIncredibles6
+*@version 1.0
+*@since 1/12/2018
+*/
 */
 public class Table {
 	/**stores all Field type objects*/
