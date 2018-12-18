@@ -19,7 +19,7 @@ public class TableMenu{
 		
 	}
 	/**
-	*Method to print out menun in screen
+	*Method to print out menu in screen
 	*/
 	public void showMenu() {
 		System.out.println("**This is the menu**");	
@@ -36,7 +36,9 @@ public class TableMenu{
 	*Contains the activities to be done based on user's decision.
 	*/
 	public int decider() {
+		/** Creates a Scanner object*/
 		Scanner input = new Scanner(System.in);
+		/**keeps in number form the choice of user*/
 		int choice = input.nextInt();
 		if (choice == 0) {
 			runTests();
@@ -66,7 +68,7 @@ public class TableMenu{
 		}
 		return choice;
 	}
-	
+	/** Returns memory used*/ 
 	public void runTests() {
 		System.out.println("See you soon!");
 		System.out.println("Total memory: " + Runtime.getRuntime().totalMemory());
