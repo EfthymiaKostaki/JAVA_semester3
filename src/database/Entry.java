@@ -1,11 +1,11 @@
 package database;
 import java.util.ArrayList;
 /** 
-*Edits Entries
+*Edits Entries from user 
 *
 *@author DetIncredibles6
 *@version 1.0
-*@since 1/12/2018
+*@since 2018-12-01
 *@param entriesAdded counter
 */
 public class Entry {
@@ -18,7 +18,7 @@ public class Entry {
 	/**
 	 * Constructor
 	 * Each object is stored on an ArrayList<Entry> 
-	 * @param entryArguements, an arraylist of Object type elements each of which is corresponds to a field
+	 * @param entryArguements, an arraylist of Object type elements each of them corresponds to a field
 	 */
 	public Entry(ArrayList<Object> entryArguements) {	
 		this.entryArguements = new ArrayList<Object> (entryArguements);
