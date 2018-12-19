@@ -41,7 +41,6 @@ public class Field {
 	
 	
 	/**
-	 * Used to return a String representation of a Field type object.
 	 * @return a String representation of a Field type object
 	 */
 	@Override
