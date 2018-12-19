@@ -4,30 +4,36 @@ package database;
 *
 *@author DetIncredibles6
 *@version 1.0
-*@since 1/12/2018
+*@since 2018-12-01
 */
 public class Field {
 
 	protected static int fieldsCounter; 
 	private Object fieldName;
-	/**Class Constuctor*/
+	/**
+	*Class Constuctor
+	*/
 	public Field() {
 		
 	}
-	/**Class Constructor for certain fieldName
+	/**
+	Class Constructor for certain fieldName
 	*@param fieldName
 	*/
 	public Field(Object fieldName) {
 		this.fieldName = fieldName;
 		fieldsCounter++;
 	}
-	/** Getter for Field names
-	*@return fields name
+	/** 
+	*Getter for Field names
+	*@return field's name
 	*/
 	public Object getFieldName() {
 		return fieldName;
 	}
-	/** Setter for Field name
+	/** 
+	Setter for Field name
+	*@param name
 	*/
 	public void setFieldName(Object name) {
 		this.fieldName = name;
@@ -35,8 +41,8 @@ public class Field {
 	
 	
 	/**
-	 * Used to return a String representation of a Field type object 
-	 * @return 
+	 * Used to return a String representation of a Field type object.
+	 * @return a String representation of a Field type object
 	 */
 	@Override
 	public String toString() {
