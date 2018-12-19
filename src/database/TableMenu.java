@@ -16,7 +16,6 @@ public class TableMenu{
 	private ArrayList<Object> entryArguements = new ArrayList<Object>();
 	/*Constructor for TableMenu*/
 	public TableMenu() {
-		
 	}
 	/**
 	*Method that prints out menu on screen.
