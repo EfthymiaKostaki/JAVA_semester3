@@ -10,7 +10,7 @@ import java.util.ArrayList;
 *
 *@author DetIncredibles6
 *@version 1.0
-*@since 2018-12-01
+*@since jdk1.8.0
 */
 public class TableMenu{
 	private ArrayList<Object> entryArguements = new ArrayList<Object>();
