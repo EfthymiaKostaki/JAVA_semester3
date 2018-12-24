@@ -1,5 +1,13 @@
 package database;
 import java.util.ArrayList;
+/** 
+*Edits Entries from user 
+*
+*@author DetIncredibles6
+*@version 1.0
+*@since jdk1.8.0
+*@param entriesAdded counter
+*/
 public class Entry {
 //	protected static ArrayList<Entry> entries = 
 //			new ArrayList<Entry>();
@@ -10,7 +18,7 @@ public class Entry {
 	/**
 	 * Constructor
 	 * Each object is stored on an ArrayList<Entry> 
-	 * @param entryArguements, an arraylist of Object type elements each of which is corresponds to a field
+	 * @param entryArguements, an arraylist of Object type elements each of them corresponds to a field
 	 */
 	public Entry(ArrayList<Object> entryArguements) {	
 		this.entryArguements = new ArrayList<Object> (entryArguements);
@@ -20,7 +28,7 @@ public class Entry {
 	
 	
 	/**
-	 * return a String with all the data concerning an Entry type object
+	 * @return a String with all the data concerning an Entry type object
 	 */
 	@Override
 	public String toString() {
