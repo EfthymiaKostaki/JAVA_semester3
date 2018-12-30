@@ -26,6 +26,22 @@ public class Entry {
 		entriesAdded++;
 	}
 	
+	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
+		boolean same = true;
+		for (int i =0; i < table.getEntries().size(); i++) {
+			for (int j = 0; j < Field.fieldsCounter; j++) {
+				if (table.getEntries().get(i).getEntryArguements().get(j) != entries.get(j)) {
+					same = false;
+				}
+			}
+		}
+		return same;
+	}
+	
+	public ArrayList<Object> getEntryArguements() {
+		return this.entryArguements;
+	}
+	
 	
 	/**
 	 * @return a String with all the data concerning an Entry type object
