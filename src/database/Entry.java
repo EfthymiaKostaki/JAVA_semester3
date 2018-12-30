@@ -28,10 +28,8 @@ public class Entry {
 	
 	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
 		for (int i = 0; i < table.getEntries().size(); i++) {
-			for (int j = 0; j < table.getFields().size(); j++) {
-				if (table.getEntries().get(i).getEntryArguements().equals(entries)) { //comparing the whole array lists at once
-					return true; // found an identical entry
-				}
+			if (table.getEntries().get(i).getEntryArguements().equals(entries)) { //comparing the whole array lists at once
+				return true; // found an identical entry
 			}
 		}
 		return false; //no identical entry found
