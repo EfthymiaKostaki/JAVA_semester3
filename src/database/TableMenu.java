@@ -62,10 +62,12 @@ public class TableMenu{
 				System.out.println("Please insert the " + table.getField(i) + ":");
 				entryArguements.add(input.next());
 			}
-			if (Entry.checkIfSameEntries(entryArguements, table)) {
+			if (Entry.checkIfSameEntries(entryArguements, table) == false) {
 				table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
 			} else {
-				System.out.println("The exact  same entry already exists. Please insert a different row!");
+				JOptionPane.showMessageDialog(null,
+					"The exact same entry already exists."
+					+ "Please insert a different row!");
 			}
 			entryArguements.clear();
 		} else if (choice == 4) {
