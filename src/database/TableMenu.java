@@ -62,7 +62,12 @@ public class TableMenu{
 				System.out.println("Please insert the " + table.getField(i) + ":");
 				entryArguements.add(input.next());
 			}
-			table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
+			boolean same = Entry.checkIfSameEntries(entryArguements, table);
+			if (same = false) {
+				table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
+			} else {
+				System.out.println("The exact  same entry already exists. Please insert a different row!");
+			}
 			entryArguements.clear();
 		} else if (choice == 4) {
 			/*existing entries are desplayed on screan
