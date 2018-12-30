@@ -27,15 +27,14 @@ public class Entry {
 	}
 	
 	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
-		boolean same = true;
-		for (int i =0; i < table.getEntries().size(); i++) {
-			for (int j = 0; j < Field.fieldsCounter; j++) {
-				if (table.getEntries().get(i).getEntryArguements().get(j) != entries.get(j)) {
-					same = false;
+		for (int i = 0; i < table.getEntries().size(); i++) {
+			for (int j = 0; j < table.getFields().size(); j++) {
+				if (table.getEntries().get(i).getEntryArguements().equals(entries)) {
+					return false; // no same entry
 				}
 			}
 		}
-		return same;
+		return true;
 	}
 	
 	public ArrayList<Object> getEntryArguements() {
