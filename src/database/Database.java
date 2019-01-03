@@ -1,5 +1,6 @@
 package database;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -9,43 +10,43 @@ import javax.swing.JOptionPane;
  *
  */
 public class Database {
-	
-	private static Database databaseInstance =
+
+	private static final Database databaseInstance =
 			new Database();
-	
+
 	//storing all the table objects in this class to represent the database
 	private ArrayList<Table> tables = new ArrayList<Table>();
-	
-	
+
+
 	private Database() {
-	
+
 	}
-	
+
 	/**
 	 * Having more than one Database objects is prevented and therefore
 	 * the unique object that exists needs to be returned in this way
 	 * @return a database object
 	 */
-	//Singleton's pattern
-	public static Database getDatabaseInstance() { 
+	//Singleton pattern
+	public static Database getDatabaseInstance() {
 		return databaseInstance;
 	}
-	
-	
+
+
 	public void addTable(Table table) {
 		tables.add(table);
 	}
-	
+
 	public ArrayList<Table> getTables() {
 		return tables;
 	}
-	
+
 	public Table getTable(int x) {
 		return tables.get(x);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tableName
 	 * @return true in case the given table name does not exist in the database
 	 * or false in case the given table name already exists and thus cannot
@@ -60,7 +61,7 @@ public class Database {
 			return true;
 		}
 	}
-	
+
 	public boolean isThereAnyTable() {
 		if (tables.size() > 0 ) {
 			return true;
@@ -68,7 +69,7 @@ public class Database {
 			return false;
 		}
 	}
-	
+
 	public int numberOfTables() {
 		return Database.getDatabaseInstance().getTables().size();
 	}
