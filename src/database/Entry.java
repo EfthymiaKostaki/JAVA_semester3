@@ -17,8 +17,7 @@ public class Entry {
 	 * 
 	 * @param entries
 	 * @param table
-	 * @return true if an identical entry already exists or false if no 
-	 * identical entry was found
+	 * @return true if an identical entry already exists or false if no identical entry was found
 	 */
 	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
 		for (int i = 0; i < table.getEntries().size(); i++) {
