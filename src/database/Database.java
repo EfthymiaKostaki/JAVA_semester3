@@ -14,11 +14,11 @@ public class Database {
 			new Database();
 	
 	//storing all the table objects in this class to represent the database
-	private ArrayList<Table> tables = new ArrayList<Table>(); 
+	private ArrayList<Table> tables = new ArrayList<Table>();
 	
 	
 	private Database() {
-		
+	
 	}
 	
 	/**
@@ -26,7 +26,8 @@ public class Database {
 	 * the unique object that exists needs to be returned in this way
 	 * @return a database object
 	 */
-	public static Database getDatabaseInstance() { //Singleton's pattern
+	//Singleton's pattern
+	public static Database getDatabaseInstance() { 
 		return databaseInstance;
 	}
 	
