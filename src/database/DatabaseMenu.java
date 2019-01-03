@@ -29,7 +29,7 @@ public class DatabaseMenu extends JFrame {
 	private static Dimension screenSize;
 	private static final DatabaseMenu databaseMenu = new DatabaseMenu(); //Singleton Pattern to ensure that only one object is created 
 	/**
-	Constructor 
+	*Class Constructor 
 	*/
 	private DatabaseMenu() {
 		getContentPane().setBackground(Color.WHITE);
