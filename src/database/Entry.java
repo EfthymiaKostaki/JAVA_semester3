@@ -1,5 +1,13 @@
 package database;
 import java.util.ArrayList;
+/** 
+*Edits Entries from user 
+*
+*@author DetIncredibles6
+*@version 1.0
+*@since jdk1.8.0
+*@param entriesAdded counter
+*/
 public class Entry {
 	private ArrayList<Object> entryArguments = new ArrayList<Object>();
 	protected static int entriesAdded;
