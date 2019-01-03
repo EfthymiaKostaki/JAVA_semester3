@@ -1,7 +1,7 @@
 package database;
 /**
-*This is the main class of the project
-*Generates all the other classes
+*This is the main class of the project.
+*Generates all the other classes.
 *
 *@author DetIncredibles6
 *@version 1.0
