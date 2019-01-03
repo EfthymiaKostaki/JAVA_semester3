@@ -55,7 +55,7 @@ public class Table {
 		return entries;
 	}
 	/**Getter for Entries
-	@param index a certain position
+	*@param index a certain position
 	*/
 	public Entry getEntry(int index) {
 		return entries.get(index);
