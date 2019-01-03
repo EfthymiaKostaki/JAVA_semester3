@@ -1,21 +1,38 @@
 package database;
-
+/**
+*Edits fields.
+*
+*@author DetIncredibles6
+*@version 1.0
+*@since jdk1.8.0
+*/
 public class Field {
 
 	private Object fieldName;
-	
+	/**
+	*Class Constuctor
+	*/
 	public Field() {
 		
 	}
-	
+	/**
+	Class Constructor for certain fieldName
+	*@param fieldName
+	*/
 	public Field(Object fieldName) {
 		this.fieldName = fieldName;
 	}
-	
+	/** 
+	*Getter for Field name
+	*@return field's name
+	*/
 	public Object getFieldName() {
 		return fieldName;
 	}
-	
+	/** 
+	Setter for Field name
+	*@param name
+	*/
 	public void setFieldName(Object name) {
 		this.fieldName = name;
 	}
@@ -32,8 +49,7 @@ public class Field {
 	
 	
 	/**
-	 * Used to return a String representation of a Field type object 
-	 * @return 
+	 * @return a String representation of a Field type object
 	 */
 	@Override
 	public String toString() {
