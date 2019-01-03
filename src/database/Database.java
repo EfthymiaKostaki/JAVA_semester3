@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * Database is the class that holds responsibility for every table
- * that exists in a database.
+ * Database is the class that holds responsibility for every table that exists in a database.
  * @author Theodosios Tsaklanos
  *
  */
