@@ -188,6 +188,7 @@ public class TableMenu extends JFrame {
 
 	/**
 	*Gets new Entries and places them into the ArrayList
+	*@return the new array list of entries
 	*/
 	public ArrayList<Object> requestNewEntryData() {
 			ArrayList<Object> entryArguments = new ArrayList<Object>();				
