@@ -8,7 +8,7 @@ import java.util.ArrayList;
 *@version 1.0
 *@since jdk1.8.0
 */
-*/
+
 public class Table {
 	/*stores all Field type objects*/
 	private ArrayList<Field> fields = new ArrayList<Field>(); 
