@@ -1,7 +1,7 @@
 package database;
 import java.util.ArrayList;
 /** 
-*Edits Entries from user 
+*Edits Entries from user. 
 *
 *@author DetIncredibles6
 *@version 1.0
@@ -22,7 +22,7 @@ public class Entry {
 	}
 	
 	/**
-	 * 
+	 * Checks if an array list of entries already exists.
 	 * @param entries arraylist objects of entries
 	 * @param table the Table that already exists
 	 * @return true if an identical entry already exists or false if no identical entry was found
