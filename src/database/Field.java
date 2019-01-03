@@ -36,9 +36,11 @@ public class Field {
 	public void setFieldName(Object name) {
 		this.fieldName = name;
 	}
-	/** Checks if the given name of a field already exists.
+	/** 
+	*Checks if the given name of a field already exists
 	*@param table the Table object that already exists 
 	*@param givenName the new name
+	*@return false if the given name already exists as a field or true otherwise
 	*/
 	public static boolean checkForPossibleDuplicate(Table table, String givenName) {
 		for(int i = 0; i < table.getFields().size(); i++) {
