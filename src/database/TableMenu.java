@@ -41,7 +41,11 @@ public class TableMenu extends JFrame {
 	private JPanel menuPanel;
 	private String givenFieldName;
 	private ArrayList<Object> entryArguments;
-	
+	/**
+	*Construstor 
+	*@param table an object of Table 
+	*@param tableName a certain String
+	*/
 	public TableMenu(Table table,String tableName) {
 		super(tableName);
 		this.table = table;
@@ -54,7 +58,9 @@ public class TableMenu extends JFrame {
 		setVisible(true);
 	}
 		
-
+	/**
+	*Method that prints out menu on screen.
+	*/
 	private JPanel createMenu() {
 		menuPanel = new JPanel();
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
@@ -136,7 +142,9 @@ public class TableMenu extends JFrame {
 		add(proceduresPanel);
 		validate();
 	}
-	
+	/**
+	*Contains the activities to be done based on user's decision. Also made with graphics.
+	*/
 	private void decider() {
 		if (optionAddField.isSelected()) {
 			givenFieldName = JOptionPane.showInputDialog("Name the field");
@@ -171,12 +179,16 @@ public class TableMenu extends JFrame {
 			System.out.println(table.getEntries());
 		}
 	}
-	
+	/** 
+	*Edits the entries that have been made.
+	*/
 	private void editEntry() {
 		//TODO (Paris, Anna - Maria , Effie)
 	}
 
-
+	/**
+	*Gets new Entries and places them into the ArrayList
+	*/
 	public ArrayList<Object> requestNewEntryData() {
 			ArrayList<Object> entryArguments = new ArrayList<Object>();				
 			for (int i = 0; i < table.getFields().size(); i++) {
@@ -191,11 +203,17 @@ public class TableMenu extends JFrame {
 			}
 			return entryArguments;
 	} 
-
+	/**
+	*Getter for Table object
+	@return table
+	*/
 	public Table getTable() {
 		return table;
 	}
-	
+	/**
+	*Setter for table object
+	*@param table
+	*/
 	public void setTable(Table table) {
 		this.table = table;
 	}
