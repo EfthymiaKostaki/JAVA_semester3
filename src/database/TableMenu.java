@@ -1,6 +1,19 @@
 package database;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
-import java.util.Scanner;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 /**
 * Contains methods to print menu and get information on users decisions.
@@ -11,83 +24,181 @@ import java.util.ArrayList;
 *@version 1.0
 *@since jdk1.8.0
 */
-public class TableMenu{
-	private ArrayList<Object> entryArguements = new ArrayList<Object>();
-	/*Constructor for TableMenu*/
-	public TableMenu() {
+
+public class TableMenu extends JFrame {
+	
+
+	private ButtonGroup groupOfButtons;
+	private JButton okButton, goBackButton;
+	private JRadioButton optionAddField, 
+	                     optionEditField, 
+	                     optionAddEntry, 
+	                     optionEditEntry, 
+	                     optionDisplay;
+	private Table table;
+
+
+	private JPanel menuPanel;
+	private String givenFieldName;
+	private ArrayList<Object> entryArguments;
+	
+	public TableMenu(Table table,String tableName) {
+		super(tableName);
+		this.table = table;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		setLayout(new FlowLayout(FlowLayout.LEFT, (DatabaseMenu.getScreenSize().width/12),
+				(DatabaseMenu.getScreenSize().height/15)));
+		setLocationRelativeTo(null);
+		add(createMenu());
+		setVisible(true);
+	}
 		
+
+	private JPanel createMenu() {
+		menuPanel = new JPanel();
+		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
+		
+		optionAddField = new JRadioButton("Add a field", true);
+		optionEditField = new JRadioButton("Edit a field", false);
+		optionAddEntry = new JRadioButton("Add an entry", false);
+		optionEditEntry = new JRadioButton("Edit an entry", false);
+		optionDisplay = new JRadioButton("Display this table's content", false);
+		
+		groupOfButtons = new ButtonGroup();
+		groupOfButtons.add(optionAddField);
+		groupOfButtons.add(optionEditField);
+		groupOfButtons.add(optionAddEntry);
+		groupOfButtons.add(optionEditEntry);
+		groupOfButtons.add(optionDisplay);
+		
+		menuPanel.add(optionAddField);
+		menuPanel.add(Box.createVerticalStrut(15)); //adding vertical trailing spaces
+		menuPanel.add(optionEditField);
+		menuPanel.add(Box.createVerticalStrut(15));
+		menuPanel.add(optionAddEntry);
+		menuPanel.add(Box.createVerticalStrut(15));
+		menuPanel.add(optionEditEntry);
+		menuPanel.add(Box.createVerticalStrut(15));
+		menuPanel.add(optionDisplay);
+		menuPanel.add(Box.createVerticalStrut(30));
+		
+		
+		okButton = new JButton("OK");
+		okButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				decider();
+			}
+		});
+		menuPanel.add(okButton);
+		menuPanel.add(Box.createVerticalStrut(15));
+		
+		goBackButton = new JButton("Back to Database Menu");
+		goBackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				DatabaseMenu.getDatabaseMenuInstance().setVisible(true);
+			}
+		});
+		menuPanel.add(goBackButton);
+		
+		return menuPanel;
 	}
-	/**
-	*Used to print out menu on the screen.
-	*/	
-	public void showMenu() {
-		System.out.println("**This is the menu**");	
-		System.out.println("0) Exit!");
-		System.out.println("1) Add fields");
-		System.out.println("2) Show the fields");
-		System.out.println("3) Add entries");
-		System.out.println("4) Show entries");
-		System.out.println("Make a choice please:");
+	
+	//einai lathos h methodos (den exei nohma na thn kalesw diaforetikes fores
+	//krataw thn logikh
+    private void followUpAction(String message,
+    							String action,
+								JComboBox<Object> combo) {
+    	
+		JPanel proceduresPanel = new JPanel();
+		proceduresPanel.setLayout(new FlowLayout());
+		JLabel label = new JLabel(message);
+		JButton actionButton = new JButton(action);
+		actionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				givenFieldName = JOptionPane
+						.showInputDialog(null, "Rename the chosen item:", null); // the 3rd arguement sets the default text!!!
+				remove(proceduresPanel);
+				proceduresPanel.revalidate();
+				validate();
+				repaint();
+				if (Standards.isNameValid(givenFieldName)) { //giving a new name and checking if it is valid simultaneously
+					table.getField(combo.getSelectedIndex()).setFieldName(givenFieldName);
+				} 
+			}
+		});
+		proceduresPanel.add(label);
+		proceduresPanel.add(Box.createVerticalStrut(15));
+		proceduresPanel.add(combo);
+		proceduresPanel.add(Box.createVerticalStrut(15));
+		proceduresPanel.add(actionButton);
+		add(proceduresPanel);
+		validate();
 	}
-	/*Creates a new Table object*/
-	Table table = new Table();
-	/**
-	*Contains the activities to be done based on user's decision.
-	*@param choice keeps an integer number between 0 and 4 that reflects the choice of the user.
-	*@return the choice that was made.
-	*/
-	public int decider() {
-		/* Creates a Scanner object*/
-		Scanner input = new Scanner(System.in);
-		int choice = input.nextInt();
-		if (choice == 0) {
-			/*method runTests is executed and then user exits the database*/
-			runTests();
-			input.close();
-		} else if (choice == 1) {
-			/*user adds fields to database*/
-			System.out.println("You are making the system heavier..ehh! Just give me the field name");
-			table.addField(new Field(input.next()));
-		} else if (choice == 2) {
-			/*existing fields are desplayed on screen
-			  if there are no fields an appropriate message appears*/
-			if (table.getFields().size() > 0) {
-				System.out.println(table.getFields());
+	
+	private void decider() {
+		if (optionAddField.isSelected()) {
+			givenFieldName = JOptionPane.showInputDialog("Name the field");
+			if (Standards.isNameValid(givenFieldName)) {
+				if (Field.checkForPossibleDuplicate(table, givenFieldName)) {					
+					table.addField(new Field(givenFieldName));
+				}
+			}
+		} else if (optionEditField.isSelected()) {
+			JComboBox<Object> fieldsCombo = new JComboBox<Object>();
+			fieldsCombo.setModel(
+					new DefaultComboBoxModel<Object>(table.getFields().toArray()));
+			fieldsCombo.setMaximumRowCount(7);
+			followUpAction("Select a field to edit: ", "Edit", fieldsCombo);
+		} else if (optionAddEntry.isSelected()) {
+			if (table.isThereAnyField()) {
+				entryArguments = requestNewEntryData();
+				if (Entry.checkIfSameEntries(entryArguments, table) == false) {
+					table.addEntry(new Entry(entryArguments)); //contrusts an Entry object and stores it to an ArrayList<Entry>
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"The exact same entry already exists."
+							+ "Please insert a different row!");
+				}
 			} else {
-				System.out.println("Get the fuck outta here..there is no single field");
+				JOptionPane.showMessageDialog(null, "There are no fields yet!");
 			}
-		} else if (choice == 3) {
-			/*user adds etries to database*/
-			for (int i = 0; i<Field.fieldsCounter; i++) {
-				System.out.println("Please insert the " + table.getField(i) + ":");
-				entryArguements.add(input.next());
-			}
-			if (Entry.checkIfSameEntries(entryArguements, table) == false) {
-				table.addEntry(new Entry(entryArguements)); //contrusts an Entry object and stores it to an ArrayList<Entry>
-			} else {
-				JOptionPane.showMessageDialog(null,
-					"The exact same entry already exists."
-					+ "Please insert a different row!");
-			}
-			entryArguements.clear();
-		} else if (choice == 4) {
-			/*existing entries are desplayed on screan
-			  if there are no entries an appropriate message appears*/
-			if (table.getEntries().size() > 0) {
-				System.out.println(table.getEntries());
-			} else {
-				System.out.println("There are no entries you fool");
-			}
+		} else if (optionEditEntry.isSelected()) {
+			editEntry();
+			
+		} else if (optionDisplay.isSelected()) {
+			System.out.println(table.getEntries());
 		}
-		return choice;
 	}
-	/** 
-	* Method that prints out the memory used on screen.
-	*/ 
-	public void runTests() {
-		System.out.println("See you soon!");
-		System.out.println("Total memory: " + Runtime.getRuntime().totalMemory());
-		System.out.println("Free memory: " + Runtime.getRuntime().freeMemory());
+	
+	private void editEntry() {
+		//TODO (Paris, Anna - Maria , Effie)
 	}
+
+
+	public ArrayList<Object> requestNewEntryData() {
+			ArrayList<Object> entryArguments = new ArrayList<Object>();				
+			for (int i = 0; i < table.getFields().size(); i++) {
+				for (;;) {
+					Object givenElement = JOptionPane.showInputDialog(null,
+							"Add " + table.getField(i));
+					if (Standards.isNameValid(givenElement)) {
+						entryArguments.add(givenElement);
+						break;
+					}
+				}
+			}
+			return entryArguments;
+	} 
+
+	public Table getTable() {
+		return table;
+	}
+	
+	public void setTable(Table table) {
+		this.table = table;
+	}
+	
 
 }
