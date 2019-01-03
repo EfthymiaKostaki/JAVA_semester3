@@ -23,8 +23,8 @@ public class Entry {
 	
 	/**
 	 * 
-	 * @param entries
-	 * @param table
+	 * @param entries arraylist objects of entries
+	 * @param table the Table that already exists
 	 * @return true if an identical entry already exists or false if no identical entry was found
 	 */
 	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
