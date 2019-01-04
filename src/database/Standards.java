@@ -12,41 +12,41 @@ import javax.swing.JOptionPane;
  */
 public class Standards {
 
-	public static boolean isNameValid(String input) {
-		if (input == null) {
-			JOptionPane.showMessageDialog(null, "No problem, you can add it later!");
-			return false;
-		} else {
-			if (!input.trim().isEmpty()) {
-				return true;
-			} else {
-				JOptionPane.showMessageDialog(null, "It can't be empty!");
-				return false;
-			}
-		}
-	}
+    public static boolean isNameValid(String input) {
+        if (input == null) {
+            JOptionPane.showMessageDialog(null, "No problem, you can add it later!");
+            return false;
+        } else {
+            if (!input.trim().isEmpty()) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "It can't be empty!");
+                return false;
+            }
+        }
+    }
 
-	public static boolean isNameValid(Object input) {
-		if (input == null) {
-			JOptionPane.showMessageDialog(null, "We discourage you to have null values!");
-			JOptionPane.showMessageDialog(null, "We have discarded this whole entry");
-			return false;
-		} else {
-			if (!input.toString().trim().isEmpty()) {
-				return true;
-			} else {
-				JOptionPane.showMessageDialog(null, "It can't be empty!");
-				return false;
-			}
-		}
-	}
+    public static boolean isNameValid(Object input) {
+        if (input == null) {
+            JOptionPane.showMessageDialog(null, "We discourage you to have null values!");
+            JOptionPane.showMessageDialog(null, "We have discarded this whole entry");
+            return false;
+        } else {
+            if (!input.toString().trim().isEmpty()) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "It can't be empty!");
+                return false;
+            }
+        }
+    }
 
-	public static boolean verify() {
-		int dealer = JOptionPane.showConfirmDialog(null, "Are you sure?");
-		if (dealer == 0) {
-			return true; //the user confirms to proceed
-		} else {
-			return false; //the user had second thoughts
-		}
-	}
+    public static boolean verify() {
+        int dealer = JOptionPane.showConfirmDialog(null, "Are you sure?");
+        if (dealer == 0) {
+            return true; //the user confirms to proceed
+        } else {
+            return false; //the user had second thoughts
+        }
+    }
 }
