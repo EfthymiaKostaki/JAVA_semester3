@@ -62,10 +62,10 @@ public class Menu extends JFrame {
     public void refresh(JPanel panel) {
     	if (panel != null) {
     		if (panel.isDisplayable()) {
-    			remove(panel);
-    			panel.revalidate();
-    			validate();
-    			repaint();
+    		    remove(panel);
+    		    panel.revalidate();
+    		    validate();
+    		    repaint();
     		}
     	}
     }
