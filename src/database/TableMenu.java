@@ -173,7 +173,13 @@ public class TableMenu extends JFrame {
 				JOptionPane.showMessageDialog(null, "There are no fields yet!");
 			}
 		} else if (optionEditEntry.isSelected()) {
-			editEntry();
+			if (table.isThereAnyField()) {
+				editEntry();
+			} else {
+				System.out.println("There are no entries yet!");
+			}
+			
+}
 			
 		} else if (optionDisplay.isSelected()) {
 			System.out.println(table.getEntries());
