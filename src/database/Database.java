@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  * @author Theodosios Tsaklanos
  *
  */
+
 public class Database {
 
     private static final Database databaseInstance =
@@ -26,6 +27,7 @@ public class Database {
     * the unique object that exists needs to be returned in this way
     * @return a database object
     */
+    
     //Singleton pattern
     public static Database getDatabaseInstance() {
         return databaseInstance;
@@ -51,6 +53,7 @@ public class Database {
     * or false in case the given table name already exists and thus cannot
     * be duplicated.
     */
+    
     public boolean checkForPossibleDuplicate(String tableName) {
         if (tables.toString().contains(tableName)) {
             JOptionPane.showMessageDialog(null,
@@ -60,7 +63,12 @@ public class Database {
             return true;
         }
     }
-    //here missing a javadoc comment 
+    
+    /**
+    *Checks if user has entered a table
+    *@return yes or no
+    */
+    
     public boolean isThereAnyTable() {
         if (tables.size() > 0) {
             return true;
