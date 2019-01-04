@@ -1,5 +1,6 @@
 package database;
 import java.util.ArrayList;
+
 /** 
 *Edits Entries from user. 
 *
