@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 /** 
 *Used to create a graphical interface in our Menu
 *
@@ -49,6 +50,7 @@ public class DatabaseMenu extends JFrame {
     /** 
     * Method that prints out memory details on screen.
     */ 
+	
     public void exitProcedure() {
         System.out.println("See you soon!");
         System.out.println("Max memory: " + Runtime.getRuntime().maxMemory());
@@ -58,10 +60,12 @@ public class DatabaseMenu extends JFrame {
         System.out.println(System.getProperty("os.name"));
         System.exit(0);
     }
+	
     /**
-    *Getter for Menu 
+    *Gets a Database menu object
     *@return databaseMenu
     */
+	
     public static DatabaseMenu getDatabaseMenuInstance() {
         return databaseMenu;
     }
@@ -143,10 +147,12 @@ public class DatabaseMenu extends JFrame {
             JOptionPane.showMessageDialog(null, "There are no tables yet!");
         }
     }
+	
     /**
     *Used to delete a table
     *@param e
     */
+	
     private void deleteExistentTableButtonActionPerformed(ActionEvent e) {
         refresh();
         if (Database.getDatabaseInstance().isThereAnyTable()) {
@@ -169,10 +175,12 @@ public class DatabaseMenu extends JFrame {
             JOptionPane.showMessageDialog(null, "There are no tables yet!");
         }
     }
+	
     /**
     *Used to delete the whole database
     *@param e
     */
+	
     private void deleteDatabaseButtonActionPerformed(ActionEvent e) {
         refresh();
         if (Database.getDatabaseInstance().isThereAnyTable()) {
@@ -199,9 +207,11 @@ public class DatabaseMenu extends JFrame {
         panel.add(actionButton);
         return panel;
     }
+	
     /**
     *Helps to make the programm suitable for every screen type
     */
+	
     public static Dimension getScreenSize() {
     	return screenSize;
     }
