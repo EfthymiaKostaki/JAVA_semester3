@@ -1,13 +1,16 @@
 package database;
+
 /**
 *Edits fields.
 *
 *@author DetIncredibles6
 *@version 1.0
 */
+
 public class Field {
 
     private Object fieldName;
+	
     /**
     *Class Constuctor
     */
@@ -15,6 +18,7 @@ public class Field {
     public Field() {
         ;
     }
+	
     /**
     *Class Constructor for certain fieldName
     *@param fieldName
@@ -23,6 +27,7 @@ public class Field {
     public Field(Object fieldName) {
         this.fieldName = fieldName;
     }
+	
     /** 
     *Gets the name of the field
     *@return field's name
@@ -31,6 +36,7 @@ public class Field {
     public Object getFieldName() {
         return fieldName;
     }
+	
     /** 
     *Sets the new field name name
     *@param name
@@ -39,6 +45,7 @@ public class Field {
     public void setFieldName(Object name) {
         this.fieldName = name;
     }
+	
     /** 
     *Checks if the given name of a field already exists.
     *@param table the Table object that already exists 
@@ -60,6 +67,7 @@ public class Field {
     /**
     * @return a String representation of a Field type object
     */
+	
     @Override
     public String toString() {
         return fieldName.toString();
