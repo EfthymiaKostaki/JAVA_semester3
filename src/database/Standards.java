@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
  *@author Anna Maria Mersinoglou
  *@author Theodosis Tsaklanos
  */
+
 public class Standards {
 
     public static boolean isNameValid(String input) {
