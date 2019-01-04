@@ -40,6 +40,7 @@ public class TableMenu extends JFrame {
 
 	private JPanel menuPanel;
 	private String givenFieldName;
+	private String givenEntryName;
 	private ArrayList<Object> entryArguments;
 	/**
 	*Construstor 
@@ -178,8 +179,6 @@ public class TableMenu extends JFrame {
 			} else {
 				System.out.println("There are no entries yet!");
 			}
-			
-}
 			
 		} else if (optionDisplay.isSelected()) {
 			System.out.println(table.getEntries());
