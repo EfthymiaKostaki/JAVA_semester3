@@ -188,8 +188,42 @@ public class TableMenu extends JFrame {
 	/** 
 	*Edits the entries that have been made.
 	*/
-	private void editEntry() {
-		//TODO (Paris, Anna - Maria , Effie)
+		private void editEntry() {
+        JComboBox<Object> comboBox1 = new JComboBox<Object>();
+        comboBox1.setModel(new DefaultComboBoxModel<Object>(
+                table.getEntries().toArray()));
+        comboBox1.setMaximumRowCount(3);	
+		JComboBox<Object> fieldsCombo = new JComboBox<Object>();
+		fieldsCombo.setModel(
+				new DefaultComboBoxModel<Object>(table.getFields().toArray()));
+		fieldsCombo.setMaximumRowCount(7);
+		JPanel proceduresPanel = new JPanel();
+		proceduresPanel.setLayout(new FlowLayout());
+		JLabel label = new JLabel("Please select entry to edit: ");
+		JButton actionButton = new JButton("Edit");
+		actionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				givenEntryName = JOptionPane
+						.showInputDialog(null, "Rename the chosen item:", null); // the 3rd arguement sets the default text!!!
+				remove(proceduresPanel);
+				proceduresPanel.revalidate();
+				validate();
+				repaint();
+				if (Standards.isNameValid(givenEntryName)) { //giving a new name and checking if it is valid simultaneously
+					table.getListEntries().get(comboBox1.getSelectedIndex()).getEntryArguments().set(fieldsCombo.getSelectedIndex(), givenEntryName);
+				} else {
+					editEntry();
+				}
+			}
+		});
+		proceduresPanel.add(label);
+		proceduresPanel.add(Box.createVerticalStrut(15));
+		proceduresPanel.add(comboBox1);
+		proceduresPanel.add(Box.createVerticalStrut(15));
+		proceduresPanel.add(fieldsCombo);
+		proceduresPanel.add(actionButton);
+		add(proceduresPanel);
+		validate();
 	}
 
 	/**
