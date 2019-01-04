@@ -29,6 +29,7 @@ public class Entry {
     * @param table the Table that already exists
     * @return true if an identical entry already exists or false if no identical entry was found
     */
+    
     public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
         for (int i = 0; i < table.getEntries().size(); i++) {
             if (table.getEntries().get(i).getEntryArguments().equals(entries)) { 
@@ -43,6 +44,7 @@ public class Entry {
     * 
     * @return an entire row of the database (an entry)
     */
+    
     public ArrayList<Object> getEntryArguments() {
         return entryArguments;
     }
@@ -50,6 +52,7 @@ public class Entry {
     /**
     *@return a String with all the data concerning an Entry type object
     */
+    
     @Override
     public String toString() {
         return entryArguments.toString();
