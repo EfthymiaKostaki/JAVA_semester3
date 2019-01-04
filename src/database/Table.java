@@ -112,9 +112,9 @@ public class Table {
 	 * 
 	 * @return an Object[] that will be used to populate a JList
 	 */
-/*	public Object[] getListEntries(){
-		return entries.toArray();
-	} */
+	public ArrayList<Entry> getListEntries(){
+		return entries;
+   	 } 
 	
 	
 
