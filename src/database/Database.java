@@ -26,7 +26,7 @@ public class Database {
 	 */
 	//Singleton pattern
 	public static Database getDatabaseInstance() {
-		return databaseInstance;
+	    return databaseInstance;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class Database {
 	 * @param table
 	 */
 	public void addTable(Table table) {
-		tables.add(table);
+	    tables.add(table);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Database {
 	 * @param index
 	 */
 	public void removeTable(int index) {
-		tables.remove(index);
+	    tables.remove(index);
 	}
 
 	/**
@@ -53,11 +53,11 @@ public class Database {
 	 * current database.
 	 */
 	public ArrayList<Table> getTables() {
-		return tables;
+	    return tables;
 	}
 
 	public Table getTable(int x) {
-		return tables.get(x);
+	    return tables.get(x);
 	}
 
 	/**
@@ -81,18 +81,18 @@ public class Database {
 	 * in the database.
 	 */
 	public boolean isThereAnyTable() {
-		if (tables.size() > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
+	    if (tables.size() > 0 ) {
+	    	return true;
+	    } else {
+		return false;
+	    }
 	}
 
 	/** Returns the size of the ArrayList that stores
 	 * the Table objects.
 	 */
 	public int numberOfTables() {
-		return Database.getDatabaseInstance().getTables().size();
+	    return Database.getDatabaseInstance().getTables().size();
 	}
 
 }
