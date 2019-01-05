@@ -32,7 +32,7 @@ public class Menu extends JFrame {
 
     /**
      *
-     * Defines fundamental things concerning a JFrame component
+     * Defines fundamental things concerning a JFrame component.
      *
      */
     public void initializeGUI() {
@@ -43,7 +43,7 @@ public class Menu extends JFrame {
     }
 
     /**
-     * Terminates everything in the current JVM
+     * Terminates everything in the current JVM.
      */
     public void terminateAll() {
         addWindowListener(new WindowAdapter() {
@@ -55,7 +55,7 @@ public class Menu extends JFrame {
     }
 
     /**
-     * Removes a JPanel component from a JFrame component
+     * Removes a JPanel component from a JFrame component.
      * @param panel
      *
      */
