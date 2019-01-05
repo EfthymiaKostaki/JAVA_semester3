@@ -6,7 +6,6 @@ import java.util.ArrayList;
 *
 *@author DetIncredibles6
 *@version 1.0
-*@param entriesAdded counter
 */
 
 public class Entry {
@@ -14,11 +13,10 @@ public class Entry {
     protected static int entriesAdded;
 
     /**
-    * Constructor.
-    * @param entryArguements an arrayList of Object type element
-    * each of which is corresponds to a field.
+    * Constructs Entry type object (rows)
+    * @param entryArguements an arrayList of Object type elements
+    * each of which corresponds to a field.
     */
-    
     public Entry(ArrayList<Object> entryArguments) {	
         this.entryArguments = new ArrayList<Object>(entryArguments);
         entriesAdded++;
@@ -30,7 +28,6 @@ public class Entry {
     * @param table the Table that already exists.
     * @return true if an identical entry already exists or false if no identical entry was found.
     */
-    
     public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
         for (int i = 0; i < table.getEntries().size(); i++) {
             if (table.getEntries().get(i).getEntryArguments().equals(entries)) { 
@@ -45,15 +42,13 @@ public class Entry {
     * 
     * @return an entire row of the database (an entry)..
     */
-    
     public ArrayList<Object> getEntryArguments() {
         return entryArguments;
     }
     
     /**
     *@return a String with all the data concerning an Entry type object.
-    */
-    
+    */  
     @Override
     public String toString() {
         return entryArguments.toString();
