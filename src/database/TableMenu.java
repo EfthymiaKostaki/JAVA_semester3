@@ -42,9 +42,9 @@ public class TableMenu extends JFrame {
     private ArrayList<Object> entryArguments;
 
     /**
-    *Constructor 
-    *@param table an object of Table 
-    *@param tableName a certain String
+    *Constructor. 
+    *@param table an object of Table. 
+    *@param tableName a certain String.
     */
     
     public TableMenu(Table table,String tableName) {
@@ -227,8 +227,8 @@ public class TableMenu extends JFrame {
         }
 
     /**
-    *Gets new Entries and places them into the ArrayList
-    *@return the new array list of entries
+    *Gets new Entries and places them into the ArrayList.
+    *@return the new array list of entries.
     */
     
     public ArrayList<Object> requestNewEntryData() {
@@ -247,8 +247,8 @@ public class TableMenu extends JFrame {
     }
     
     /**
-    *Gets a Table object
-    *@return table
+    *Gets a Table object.
+    *@return table.
     */
     
     public Table getTable() {
@@ -256,8 +256,8 @@ public class TableMenu extends JFrame {
     }
     
     /**
-    *Setter for table object
-    *@param table
+    *Setter for table object.
+    *@param table.
     */
     
     public void setTable(Table table) {
