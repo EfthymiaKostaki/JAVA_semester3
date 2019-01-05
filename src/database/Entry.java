@@ -14,9 +14,9 @@ public class Entry {
     protected static int entriesAdded;
 
     /**
-    * Constructor
-    * @param entryArguements an arrayList of Object type elements 
-    * each of which is corresponds to a field
+    * Constructor.
+    * @param entryArguements an arrayList of Object type element
+    * each of which is corresponds to a field.
     */
     
     public Entry(ArrayList<Object> entryArguments) {	
@@ -26,9 +26,9 @@ public class Entry {
 
     /**
     * Checks if an arrayList of entries already exists.
-    * @param entries arrayList objects of entries
-    * @param table the Table that already exists
-    * @return true if an identical entry already exists or false if no identical entry was found
+    * @param entries arrayList objects of entries.
+    * @param table the Table that already exists.
+    * @return true if an identical entry already exists or false if no identical entry was found.
     */
     
     public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
@@ -43,7 +43,7 @@ public class Entry {
 
     /**
     * 
-    * @return an entire row of the database (an entry)
+    * @return an entire row of the database (an entry)..
     */
     
     public ArrayList<Object> getEntryArguments() {
@@ -51,7 +51,7 @@ public class Entry {
     }
     
     /**
-    *@return a String with all the data concerning an Entry type object
+    *@return a String with all the data concerning an Entry type object.
     */
     
     @Override
