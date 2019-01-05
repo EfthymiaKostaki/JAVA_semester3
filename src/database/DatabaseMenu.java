@@ -58,7 +58,7 @@ public class DatabaseMenu extends Menu {
 	 * Initializes all the
 	 * components that are going
 	 * to be used in this window.
-	 * @return a JPanel component that represents the main menu
+	 * @return a JPanel component that represents the main menu.
 	 */
 	public JPanel databaseMenu() {
 		databasePanel = new JPanel();
