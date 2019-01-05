@@ -5,214 +5,235 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.util.Date;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/** 
-*Used to create a graphical interface in our Menu.
-*
-*@author DetIncredibles6
-*@version 1.0
-*/
+/**
+ * Creates the menu of the database.
+ * Actions such as creating,editing or deleting a table
+ * are managed by this window.
+ * @author Theodosis Tsaklanos
+ *
+ */
+public class DatabaseMenu extends Menu {
 
-public class DatabaseMenu extends JFrame {
-    private JPanel panel = new JPanel();
-    private static Dimension screenSize;
-    private static final DatabaseMenu databaseMenu = new DatabaseMenu(); //Singleton Pattern to ensure that only one object is created 
-    
-    /**
-    *Class Constructor. 
-    */
-    
-    private DatabaseMenu() {
-        getContentPane().setBackground(Color.WHITE);
-        add(databaseMenu());
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setVisible(true);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent event) {
-                exitProcedure();
-            }
-        });
-    }
-	
-    /** 
-    * Method that prints out memory details on screen.
-    */ 
-	
-    public void exitProcedure() {
-        System.out.println("See you soon!");
-        System.out.println("Max memory: " + Runtime.getRuntime().maxMemory());
-        System.out.println("Total memory: " + Runtime.getRuntime().totalMemory());
-        System.out.println("Free memory: " + Runtime.getRuntime().freeMemory());
-        System.out.println("Used memory: " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
-        System.out.println(System.getProperty("os.name"));
-        System.exit(0);
-    }
-	
-    /**
-    *Gets a Database menu object.
-    *@return databaseMenu
-    */
-	
-    public static DatabaseMenu getDatabaseMenuInstance() {
-        return databaseMenu;
-    }
+	//Singleton Pattern to ensure that only one object is created
+	private static final DatabaseMenu databaseMenu =
+					new DatabaseMenu("Database Main Menu");
+	private final Dimension idealButtonSize = new Dimension(140, 25);
+	private	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private JButton createNewTableButton;
+	private JButton editExistentTableButton;
+	private JButton editButton;
+	private JButton deleteExistentTableButton;
+	private JButton deleteButton;
+	private JButton deleteDatabaseButton;
+	private JComboBox<Object> listOfTables;
+	private JLabel welcomeLabel;
+	private JLabel dateLabel;
+	private JPanel databasePanel;
+	private JPanel sidePanel;
 
-    public JPanel databaseMenu() {
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension idealButtonSize = new Dimension(140, 25);
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, screenSize.height / 3));
-        JPanel databasePanel = new JPanel();
-        databasePanel.setLayout(new BoxLayout(databasePanel, BoxLayout.Y_AXIS));
-        JButton createNewTableButton = new JButton("Create a new table");
-        createNewTableButton.setMaximumSize(idealButtonSize);
-        createNewTableButton.addActionListener(this
-                ::createNewTableButtonActionPerformed);
-        JButton editExistentTableButton = new JButton("Edit a table");
-        editExistentTableButton.setMaximumSize(idealButtonSize);
-        editExistentTableButton.addActionListener(this
-                ::editExistentTableButtonActionPerformed);
-        JButton deleteExistentTableButton = new JButton("Delete a table");
-        deleteExistentTableButton.addActionListener(this
-                ::deleteExistentTableButtonActionPerformed);
-        deleteExistentTableButton.setMaximumSize(idealButtonSize);
-        JButton deleteDatabaseButton = new JButton("Delete database");
-        deleteDatabaseButton.setMaximumSize(idealButtonSize);
-        deleteDatabaseButton.addActionListener(this
-        		::deleteDatabaseButtonActionPerformed);
-        databasePanel.setBackground(Color.WHITE);
-        databasePanel.add(createNewTableButton);
-        databasePanel.add(Box.createVerticalStrut(15));
-        databasePanel.add(editExistentTableButton);
-        databasePanel.add(Box.createVerticalStrut(15));
-        databasePanel.add(deleteExistentTableButton);
-        databasePanel.add(Box.createVerticalStrut(15));
-        databasePanel.add(deleteDatabaseButton);
-        return databasePanel;
 
-    }
+	private DatabaseMenu(String tableName) {
+		super(tableName);
+	    super.initializeGUI();;
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, screenSize.height / 3));
+		add(databaseMenu());
+		setVisible(true);
+	}
 
-    public void refresh() {
-        remove(panel);
-        panel.revalidate();
-        validate();
-        repaint();
-    }
+	public static DatabaseMenu getDatabaseMenuInstance() {
+		return databaseMenu;
+	}
 
-    private void createNewTableButtonActionPerformed(ActionEvent e) {
-        refresh();
-        String tableName = JOptionPane.showInputDialog("Please name the table");
-        if (Standards.isNameValid(tableName)) {
-            if(Database.getDatabaseInstance().checkForPossibleDuplicate(tableName)) {			
-                Database.getDatabaseInstance().addTable(new Table(tableName));
-                setVisible(false);
-            }
-        }
-    }
+	/**
+	 * Initializes all the
+	 * components that are going
+	 * to be used in this window.
+	 * @return a JPanel component that represents the main menu
+	 */
+	public JPanel databaseMenu() {
+		databasePanel = new JPanel();
+		databasePanel.setLayout(new BoxLayout(databasePanel, BoxLayout.Y_AXIS));
+		databasePanel.setBackground(Color.WHITE);
 
-    private void editExistentTableButtonActionPerformed(ActionEvent e) {
-        refresh();
-        if (Database.getDatabaseInstance().isThereAnyTable()) {
-            String message = "Select a table to edit";
-            JComboBox<Object> listOfTables = new JComboBox<Object>(
-                    Database.getDatabaseInstance()
-                            .getTables()
-                            .toArray());
-            listOfTables.setBackground(Color.WHITE);
-            JButton editButton = new JButton("Edit");
-            editButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    refresh();
-                    new TableMenu(
-                            Database.getDatabaseInstance()
-                            .getTable(listOfTables.getSelectedIndex()),
-                            listOfTables.getSelectedItem().toString());
-                }
-            });
-            add(tableDestiny(message, listOfTables, editButton));
-            validate();
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no tables yet!");
-        }
-    }
-	
-    /**
-    *Used to delete a table.
-    *@param e.
-    */
-	
-    private void deleteExistentTableButtonActionPerformed(ActionEvent e) {
-        refresh();
-        if (Database.getDatabaseInstance().isThereAnyTable()) {
-            String message = "Select a table to delete";
-            JComboBox<Object> listOfTables = new JComboBox<Object>(
-                    Database.getDatabaseInstance()
-                    .getTables()
-                    .toArray());
-            listOfTables.setBackground(Color.WHITE);
-            JButton deleteButton = new JButton("Delete");
-            deleteButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Database.getDatabaseInstance().getTables().remove(listOfTables.getSelectedIndex());
-                    refresh();
-                }
-            });
-            add(tableDestiny(message, listOfTables, deleteButton));
-            validate();
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no tables yet!");
-        }
-    }
-	
-    /**
-    *Used to delete the whole database.
-    *@param e
-    */
-	
-    private void deleteDatabaseButtonActionPerformed(ActionEvent e) {
-        refresh();
-        if (Database.getDatabaseInstance().isThereAnyTable()) {
-            if (Standards.verify()) {
-                for (int i = 0; i < Database.getDatabaseInstance().numberOfTables(); i++) {
-                    Database.getDatabaseInstance().getTable(i).clearTable();
-                }
-                Database.getDatabaseInstance().getTables().clear();
-                JOptionPane.showMessageDialog(null, 
-                        "Your database was successfully deleted");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "The database is empty!");
-        }
-    }
+		String username = System.getProperty("user.name");
+		welcomeLabel = new JLabel("Welcome " + username);
 
-    private JPanel tableDestiny(String message, JComboBox<Object> listOfTables, JButton actionButton) {
-        panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(new FlowLayout());
-        JLabel label = new JLabel(message);
-        panel.add(label);
-        panel.add(listOfTables);
-        panel.add(actionButton);
-        return panel;
-    }
-	
-    /**
-    *Helps to make the programm suitable for every screen type.
-    */
-	
-    public static Dimension getScreenSize() {
-    	return screenSize;
-    }
+		dateLabel = new JLabel("<html>Last access at:"
+				+ "<br/>" + new Date().toString() + "</html>");
+
+		createNewTableButton = new JButton("Create a new table");
+		createNewTableButton.setMaximumSize(idealButtonSize);
+		createNewTableButton.addActionListener(this::
+			createNewTableButtonActionPerformed);
+
+		editExistentTableButton = new JButton("Edit a table");
+		editExistentTableButton.setMaximumSize(idealButtonSize);
+		editExistentTableButton.addActionListener(this::
+			editExistentTableButtonActionPerformed);
+
+		deleteExistentTableButton = new JButton("Delete a table");
+		deleteExistentTableButton.addActionListener(this::
+			deleteExistentTableButtonActionPerformed);
+		deleteExistentTableButton.setMaximumSize(idealButtonSize);
+
+		deleteDatabaseButton = new JButton("Delete database");
+		deleteDatabaseButton.setMaximumSize(idealButtonSize);
+		deleteDatabaseButton.addActionListener(this::
+			deleteDatabaseButtonActionPerformed);
+
+		databasePanel.add(welcomeLabel);
+		databasePanel.add(Box.createVerticalStrut(25));
+		databasePanel.add(createNewTableButton);
+		databasePanel.add(Box.createVerticalStrut(15));
+		databasePanel.add(editExistentTableButton);
+		databasePanel.add(Box.createVerticalStrut(15));
+		databasePanel.add(deleteExistentTableButton);
+		databasePanel.add(Box.createVerticalStrut(15));
+		databasePanel.add(deleteDatabaseButton);
+		databasePanel.add(Box.createVerticalStrut(15));
+		databasePanel.add(dateLabel);
+
+		return databasePanel;
+
+	}
+
+	/**
+	 * Allows the user to create a new table in the database.
+	 * @param e
+	 */
+	private void createNewTableButtonActionPerformed(ActionEvent e) {
+		if (Database.getDatabaseInstance().isThereAnyTable()) {
+		    super.refresh(sidePanel);
+		}
+		String tableName = JOptionPane.showInputDialog(this,
+				"Please name the table");
+		if (Standards.isNameValid(tableName)) {
+			if(Database.getDatabaseInstance().checkForDuplicateTables(tableName)) {
+				Database.getDatabaseInstance().addTable(new Table(tableName));
+				setVisible(false);
+			}
+		}
+	}
+
+	/**
+	 *
+	 * Displays every table of the database and allows the user
+	 * to choose the one they would like to edit.
+	 * {@link database.DatabaseMenu#editButtonActionPerformed(ActionEvent)}
+	 * @param e
+	 */
+	private void editExistentTableButtonActionPerformed(ActionEvent e) {
+		if (Database.getDatabaseInstance().isThereAnyTable()) {
+		    super.refresh(sidePanel);
+			String message = "Select a table to edit";
+			listOfTables = new JComboBox<Object>(Database
+							.getDatabaseInstance()
+							.getTables()
+							.toArray());
+
+			listOfTables.setBackground(Color.WHITE);
+			editButton = new JButton("Edit");
+			editButton.addActionListener(this::editButtonActionPerformed);
+			add(tableDestiny(message, listOfTables, editButton));
+			validate();
+		} else {
+			JOptionPane.showMessageDialog(null, "There are no tables yet!");
+		}
+	}
+
+	/**
+	 * Invoked when
+	 * {@link database.DatabaseMenu#editExistentTableButton} is clicked.
+	 * Displays the menu of the chosen table.
+	 * @param e
+	 */
+	private void editButtonActionPerformed(ActionEvent e) {
+		super.refresh(sidePanel);
+		int index = listOfTables.getSelectedIndex();
+		new TableMenu(Database.getDatabaseInstance().getTable(index),
+						listOfTables.getSelectedItem().toString());
+	}
+
+	/**
+	 * Displays every table of the database and allows the user
+	 * to choose the one they would like to delete.
+	 * {@link database.DatabaseMenu#deleteButton}
+	 * @param e
+	 */
+	private void deleteExistentTableButtonActionPerformed(ActionEvent e) {
+		if (Database.getDatabaseInstance().isThereAnyTable()) {
+			super.refresh(sidePanel);
+			String message = "Select a table to delete";
+			listOfTables = new JComboBox<Object>(Database
+							.getDatabaseInstance()
+							.getTables()
+							.toArray());
+
+			listOfTables.setBackground(Color.WHITE);
+			deleteButton = new JButton("Delete");
+			deleteButton.addActionListener(this::deleteButtonActionPerformed);
+			add(tableDestiny(message, listOfTables, deleteButton));
+			validate();
+		} else {
+			JOptionPane.showMessageDialog(null, "There are no tables yet!");
+		}
+	}
+
+	/**
+	 * Invoked when
+	 * {@link database.DatabaseMenu#deleteExistentTableButton} is clicked.
+	 * Deletes the chosen table.
+	 * @param e
+	 */
+	private void deleteButtonActionPerformed(ActionEvent e) {
+		super.refresh(sidePanel);
+		int index = listOfTables.getSelectedIndex();
+		Database.getDatabaseInstance().getTable(index).clearTable();
+		Database.getDatabaseInstance().removeTable(index);
+	}
+
+	/**
+	 * Deletes every table from the database. <br>
+	 * Note: No table is deleted if there are no tables in the database.
+	 * @param e
+	 */
+	private void deleteDatabaseButtonActionPerformed(ActionEvent e) {
+		if (Database.getDatabaseInstance().isThereAnyTable()) {
+			super.refresh(sidePanel);
+			if (Standards.verify()) {
+				for (int i = 0; i < Database.getDatabaseInstance().numberOfTables(); i++) {
+					Database.getDatabaseInstance().getTable(i).clearTable();
+				}
+				Database.getDatabaseInstance().getTables().clear();
+				JOptionPane.showMessageDialog(null,
+						"Your database was successfully deleted!");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "The database is empty!");
+		}
+	}
+
+
+
+	private JPanel tableDestiny(String message, JComboBox<Object> listOfTables, JButton actionButton) {
+		sidePanel = new JPanel();
+		sidePanel.setBackground(Color.WHITE);
+		sidePanel.setLayout(new FlowLayout());
+		JLabel label = new JLabel(message);
+		sidePanel.add(label);
+		sidePanel.add(listOfTables);
+		sidePanel.add(actionButton);
+		return sidePanel;
+	}
+
 }
