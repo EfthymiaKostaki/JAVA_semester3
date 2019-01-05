@@ -66,7 +66,7 @@ public class TableMenu extends JFrame {
         optionAddEntry = new JRadioButton("Add an entry", false);
         optionEditEntry = new JRadioButton("Edit an entry", false);
         optionDisplay = new JRadioButton("Display this table's content", false);
-        optionDelete=new JRadioButton("Delete an entry");
+        optionDelete = new JRadioButton("Delete an entry");
         groupOfButtons = new ButtonGroup();
         groupOfButtons.add(optionAddField);
         groupOfButtons.add(optionEditField);
