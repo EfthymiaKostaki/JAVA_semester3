@@ -223,8 +223,15 @@ public class DatabaseMenu extends Menu {
 		}
 	}
 
-
-
+	/**
+	 *
+	 * @param message
+	 * @param listOfTables
+	 * @param actionButton
+	 * @return a JPanel component that includes a list of tables
+	 * as well as a button that declares the action to be applied
+	 * on the chosen table.
+	 */
 	private JPanel tableDestiny(String message, JComboBox<Object> listOfTables, JButton actionButton) {
 		sidePanel = new JPanel();
 		sidePanel.setBackground(Color.WHITE);
@@ -235,5 +242,4 @@ public class DatabaseMenu extends Menu {
 		sidePanel.add(actionButton);
 		return sidePanel;
 	}
-
 }
