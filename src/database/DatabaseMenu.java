@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /** 
-*Used to create a graphical interface in our Menu
+*Used to create a graphical interface in our Menu.
 *
 *@author DetIncredibles6
 *@version 1.0
@@ -30,7 +30,7 @@ public class DatabaseMenu extends JFrame {
     private static final DatabaseMenu databaseMenu = new DatabaseMenu(); //Singleton Pattern to ensure that only one object is created 
     
     /**
-    *Class Constructor 
+    *Class Constructor. 
     */
     
     private DatabaseMenu() {
@@ -62,7 +62,7 @@ public class DatabaseMenu extends JFrame {
     }
 	
     /**
-    *Gets a Database menu object
+    *Gets a Database menu object.
     *@return databaseMenu
     */
 	
@@ -149,8 +149,8 @@ public class DatabaseMenu extends JFrame {
     }
 	
     /**
-    *Used to delete a table
-    *@param e
+    *Used to delete a table.
+    *@param e.
     */
 	
     private void deleteExistentTableButtonActionPerformed(ActionEvent e) {
@@ -177,7 +177,7 @@ public class DatabaseMenu extends JFrame {
     }
 	
     /**
-    *Used to delete the whole database
+    *Used to delete the whole database.
     *@param e
     */
 	
@@ -209,7 +209,7 @@ public class DatabaseMenu extends JFrame {
     }
 	
     /**
-    *Helps to make the programm suitable for every screen type
+    *Helps to make the programm suitable for every screen type.
     */
 	
     public static Dimension getScreenSize() {
