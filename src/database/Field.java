@@ -12,7 +12,7 @@ public class Field {
     private Object fieldName;
 	
     /**
-    *Class Constuctor
+    *Class Constuctor.
     */
     
     public Field() {
@@ -20,7 +20,7 @@ public class Field {
     }
 	
     /**
-    *Class Constructor for certain fieldName
+    *Class Constructor for certain fieldName.
     *@param fieldName
     */
     
@@ -29,7 +29,7 @@ public class Field {
     }
 	
     /** 
-    *Gets the name of the field
+    *Gets the name of the field.
     *@return field's name
     */
 
@@ -38,7 +38,7 @@ public class Field {
     }
 	
     /** 
-    *Sets the new field name name
+    *Sets the new field name name.
     *@param name
     */
 
@@ -48,9 +48,9 @@ public class Field {
 	
     /** 
     *Checks if the given name of a field already exists.
-    *@param table the Table object that already exists 
-    *@param givenName the new name
-    *@return false if the given name already exists as a field or true otherwise
+    *@param table the Table object that already exists.
+    *@param givenName the new name.
+    *@return false if the given name already exists as a field or true otherwise.
     */
     
     public static boolean checkForPossibleDuplicate(Table table, String givenName) {
@@ -65,7 +65,7 @@ public class Field {
 
 	
     /**
-    * @return a String representation of a Field type object
+    * @return a String representation of a Field type object.
     */
 	
     @Override
