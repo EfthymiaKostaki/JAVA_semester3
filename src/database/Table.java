@@ -15,7 +15,7 @@ public class Table {
     private String tableName;
  
     /**
-    *Class Constructor 
+    *Class Constructor. 
     *@param tableName
     */
     
@@ -25,7 +25,7 @@ public class Table {
     }
     
     /** 
-    *Getter for Table's name 
+    *Getter for Table's name.
     *@return tableName
     */
     
@@ -34,7 +34,7 @@ public class Table {
     }
     
     /**
-    *Sets table name
+    *Sets table name.
     *@param tableName
     */
     
@@ -43,7 +43,7 @@ public class Table {
     }
     
     /**
-    *Used to add Fields
+    *Used to add Fields.
     *@param field a new field added 
     */
     
@@ -52,7 +52,7 @@ public class Table {
     }
     
     /**
-    *Used to add Entries
+    *Used to add Entries.
     *@param entry a new entry added 
     */
     
@@ -69,7 +69,7 @@ public class Table {
     }
     
     /**
-    *Getter for Entries
+    *Getter for Entries.
     *@param index a certain position
     *@return entries in this position
     */
@@ -79,7 +79,7 @@ public class Table {
     }
     
     /**
-    *Gets fields from a certain position
+    *Gets fields from a certain position.
     *@param index a certain position
     *@return fields in this position 
     */
@@ -97,8 +97,8 @@ public class Table {
     }
  
     /**
-    * clears the arrayLists that contain the fields.
-    * clears the entries of the certain table.
+    * Clears the arrayLists that contain the fields.
+    * Clears the entries of the certain table.
     */
     
     public void clearTable() {
