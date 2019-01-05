@@ -12,36 +12,24 @@ public class Field {
     private Object fieldName;
 	
     /**
-    *Class Constuctor.
-    */
-    
-    public Field() {
-        ;
-    }
-	
-    /**
-    *Class Constructor for certain fieldName.
+    *Constructs Field type objects (column name).
     *@param fieldName
     */
-    
     public Field(Object fieldName) {
         this.fieldName = fieldName;
     }
 	
     /** 
-    *Gets the name of the field.
-    *@return field's name
+    *Returns the name of the field.
     */
-
     public Object getFieldName() {
         return fieldName;
     }
 	
     /** 
-    *Sets the new field name name.
+    *Sets the new field name.
     *@param name
     */
-
     public void setFieldName(Object name) {
         this.fieldName = name;
     }
@@ -52,7 +40,6 @@ public class Field {
     *@param givenName the new name.
     *@return false if the given name already exists as a field or true otherwise.
     */
-    
     public static boolean checkForPossibleDuplicate(Table table, String givenName) {
         for (int i = 0; i < table.getFields().size(); i++) {
             if (givenName.equals(table.getField(i).toString())) {
@@ -67,7 +54,6 @@ public class Field {
     /**
     * @return a String representation of a Field type object.
     */
-	
     @Override
     public String toString() {
         return fieldName.toString();
