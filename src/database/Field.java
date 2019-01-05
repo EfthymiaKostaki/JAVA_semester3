@@ -1,10 +1,10 @@
 package database;
 
 /**
-*Edits fields.
 *
-*@author DetIncredibles6
-*@version 1.0
+* @author Paris Mpampaniotis
+* @author Theodosis Tsaklanos
+* @version 1.0
 */
 
 public class Field {
