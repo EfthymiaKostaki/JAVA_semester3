@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
 /**
 * Contains methods to print menu and get information on users decisions.
 * When user makes a choice then certain specific tasks are being carried out.
@@ -23,7 +22,6 @@ import javax.swing.JRadioButton;
 *@author DetIncredibles6
 *@version 1.0
 */
-
 public class TableMenu extends JFrame {
 
     private ButtonGroup groupOfButtons;
@@ -32,7 +30,8 @@ public class TableMenu extends JFrame {
                          optionEditField, 
                          optionAddEntry, 
                          optionEditEntry, 
-                         optionDisplay;
+                         optionDisplay, 
+                         optionDelete;
     private Table table;
 
 
@@ -40,13 +39,11 @@ public class TableMenu extends JFrame {
     private String givenFieldName;
     private String givenEntryName;
     private ArrayList<Object> entryArguments;
-
     /**
     *Constructor. 
-    *@param table an object of Table. 
-    *@param tableName a certain String.
+    *@param table an object of Table 
+    *@param tableName a certain String
     */
-    
     public TableMenu(Table table,String tableName) {
         super(tableName);
         this.table = table;
@@ -58,11 +55,9 @@ public class TableMenu extends JFrame {
         add(createMenu());
         setVisible(true);
     }
-
     /**
     *Method that prints out menu on screen.
     */
-    
     private JPanel createMenu() {
         menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
@@ -71,12 +66,14 @@ public class TableMenu extends JFrame {
         optionAddEntry = new JRadioButton("Add an entry", false);
         optionEditEntry = new JRadioButton("Edit an entry", false);
         optionDisplay = new JRadioButton("Display this table's content", false);
+        optionDelete=new JRadioButton("Delete an entry");
         groupOfButtons = new ButtonGroup();
         groupOfButtons.add(optionAddField);
         groupOfButtons.add(optionEditField);
         groupOfButtons.add(optionAddEntry);
         groupOfButtons.add(optionEditEntry);
         groupOfButtons.add(optionDisplay);
+        groupOfButtons.add(optionDelete);
         menuPanel.add(optionAddField);
         menuPanel.add(Box.createVerticalStrut(15)); //adding vertical trailing spaces
         menuPanel.add(optionEditField);
@@ -86,6 +83,8 @@ public class TableMenu extends JFrame {
         menuPanel.add(optionEditEntry);
         menuPanel.add(Box.createVerticalStrut(15));
         menuPanel.add(optionDisplay);
+        menuPanel.add(Box.createVerticalStrut(15));
+        menuPanel.add(optionDelete);
         menuPanel.add(Box.createVerticalStrut(30));
         okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() {
@@ -138,11 +137,9 @@ public class TableMenu extends JFrame {
         add(proceduresPanel);
         validate();
     }
-    
     /**
     *Contains the activities to be done based on user's decision. Also made with graphics.
     */
-    
     private void decider() {
         if (optionAddField.isSelected()) {
             givenFieldName = JOptionPane.showInputDialog("Name the field");
@@ -181,13 +178,18 @@ public class TableMenu extends JFrame {
 
         } else if (optionDisplay.isSelected()) {
             System.out.println(table.getEntries());
+        } else if (optionDelete.isSelected()) {
+        	if (table.isThereAnyField()) {
+        		deleteEntry();
+        	} else {
+        	    System.out.println("There are no entries yet!");
+        	}
         }
-    }
-    
+        
+    }    
     /** 
     *Edits the entries that have been made.
-    */
-    
+    */ 
     private void editEntry() {
         JComboBox<Object> comboBox1 = new JComboBox<Object>();
         comboBox1.setModel(new DefaultComboBoxModel<Object>(
@@ -225,12 +227,39 @@ public class TableMenu extends JFrame {
         add(proceduresPanel);
         validate();
         }
-
+    public void deleteEntry() {
+    	JComboBox<Object> comboBox1 = new JComboBox<Object>();
+        comboBox1.setModel(new DefaultComboBoxModel<Object>(
+                table.getEntries().toArray()));
+        comboBox1.setMaximumRowCount(3);	
+        JComboBox<Object> fieldsCombo = new JComboBox<Object>();
+        fieldsCombo.setModel(
+                new DefaultComboBoxModel<Object>(table.getFields().toArray()));
+        fieldsCombo.setMaximumRowCount(7);
+        JPanel proceduresPanel = new JPanel();
+        proceduresPanel.setLayout(new FlowLayout());
+        JLabel label = new JLabel("Please select entry to delete: ");
+        JButton actionButton = new JButton("delete");
+        actionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               
+                table.getListEntries().get(comboBox1.getSelectedIndex()).getEntryArguments().set(fieldsCombo.getSelectedIndex(), null);
+                
+            }
+        });
+        proceduresPanel.add(label);
+        proceduresPanel.add(Box.createVerticalStrut(15));
+        proceduresPanel.add(comboBox1);
+        proceduresPanel.add(Box.createVerticalStrut(15));
+        proceduresPanel.add(fieldsCombo);
+        proceduresPanel.add(actionButton);
+        add(proceduresPanel);
+        validate();
+    }
     /**
     *Gets new Entries and places them into the ArrayList.
-    *@return the new array list of entries.
+    *@return the new array list of entries
     */
-    
     public ArrayList<Object> requestNewEntryData() {
             ArrayList<Object> entryArguments = new ArrayList<Object>();				
             for (int i = 0; i < table.getFields().size(); i++) {
@@ -245,22 +274,18 @@ public class TableMenu extends JFrame {
                 }
             return entryArguments;
     }
-    
     /**
     *Gets a Table object.
-    *@return table.
+    *@return table
     */
-    
     public Table getTable() {
         return table;
     }
-    
     /**
     *Setter for table object.
-    *@param table.
     */
-    
     public void setTable(Table table) {
         this.table = table;
     }
+    
 }
