@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Database is the class that holds responsibility for every table that exists in a database.
- * @author Theodosios Tsaklanos
+ * @author Theodosios Tsaklanos.
  *
  */
 
@@ -23,9 +23,9 @@ public class Database {
     }
 
     /**
-    * Having more than one Database objects is prevented and therefore
-    * the unique object that exists needs to be returned in this way
-    * @return a database object
+    * Having more than one Database objects is prevented and therefore,
+    * the unique object that exists needs to be returned in this way.
+    * @return a database object.
     */
     
     //Singleton pattern
@@ -48,7 +48,7 @@ public class Database {
 
     /**
     *
-    * @param tableName//here needs a description
+    * @param tableName//here needs a description.
     * @return true in case the given table name does not exist in the database
     * or false in case the given table name already exists and thus cannot
     * be duplicated.
@@ -65,8 +65,8 @@ public class Database {
     }
     
     /**
-    *Checks if user has entered a table
-    *@return yes or no
+    *Checks if user has entered a table.
+    *@return yes or no.
     */
     
     public boolean isThereAnyTable() {
