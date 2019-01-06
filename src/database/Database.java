@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author Theodosis Tsaklanos
  * @author Paris Mpampaniotis
+ * @version 1.1
  */
 public class Database {
 
