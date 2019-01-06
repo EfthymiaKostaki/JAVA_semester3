@@ -1,57 +1,59 @@
 package database;
 import java.util.ArrayList;
-
-/** 
-*Edits Entries from user. 
-*
-*@author DetIncredibles6
-*@version 1.0
-*/
-
+/**
+ *
+ * @author Efthymia Kostaki
+ * @author Paris Mpampaniotis
+ * @author Theodosis Tsaklanos
+ *
+ */
 public class Entry {
-    private ArrayList<Object> entryArguments = new ArrayList<Object>();
-    protected static int entriesAdded;
+	private ArrayList<Object> entryArguments = new ArrayList<Object>();
 
-    /**
-    * Constructs Entry type object (rows)
-    * @param entryArguements an arrayList of Object type elements
-    * each of which corresponds to a field.
-    */
-    public Entry(ArrayList<Object> entryArguments) {	
-        this.entryArguments = new ArrayList<Object>(entryArguments);
-        entriesAdded++;
-    }
+	/**
+	 * Constructor
+	 * @param entryArguments, an arraylist of Object type elements each of which is corresponds to a field
+	 */
+	public Entry(ArrayList<Object> entryArguments) {
+		this.entryArguments = new ArrayList<Object> (entryArguments);
+	}
 
-    /**
-    * Checks if an arrayList of entries already exists.
-    * @param entries arrayList objects of entries.
-    * @param table the Table that already exists.
-    * @return true if an identical entry already exists or false if no identical entry was found.
-    */
-    public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
-        for (int i = 0; i < table.getEntries().size(); i++) {
-            if (table.getEntries().get(i).getEntryArguments().equals(entries)) { 
-            	//comparing the whole array lists at once
-                return true; // found an identical entry
-            }
-        }
-        return false; //no identical entry found
-    }
+	/**
+	 *
+	 * @param entries
+	 * @param table
+	 * @return true if an identical entry already exists or false if no
+	 * identical entry was found
+	 */
+	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
+		for (int i = 0; i < table.getEntries().size(); i++) {
+			if (table.getEntries().get(i).getEntryArguments().equals(entries)) {
+				return true; // found an identical entry
+			}
+		}
+		return false; //no identical entry found
+	}
 
-    /**
-    * 
-    * @return an entire row of the database (an entry)..
-    */
-    public ArrayList<Object> getEntryArguments() {
-        return entryArguments;
-    }
-    
-    /**
-    *@return a String with all the data concerning an Entry type object.
-    */  
-    @Override
-    public String toString() {
-        return entryArguments.toString();
-    } 
+	/**
+	 *
+	 * @return an entire row of the database (an entry)
+	 */
+	public ArrayList<Object> getEntryArguments() {
+		return entryArguments;
+	}
+
+	/**
+	 * @param index
+	 * @return a specific element of a row
+	 */
+	public Object getEntryArgument(int index) {
+		return entryArguments.get(index);
+	}
+
+
+	@Override
+	public String toString() {
+		return entryArguments.toString();
+	}
 
 }
