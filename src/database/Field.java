@@ -1,9 +1,10 @@
 package database;
 
 /**
-*
+* Used for anything in relation with Fields.  
 * @author Paris Mpampaniotis
 * @author Theodosis Tsaklanos
+* @author Anna Maria Mersinoglou
 * @version 1.0
 */
 
