@@ -20,6 +20,7 @@ import javax.swing.JPanel;
  * Actions such as creating,editing or deleting a table
  * are managed by this window.
  * @author Theodosis Tsaklanos
+ * @version 1.1
  *
  */
 public class DatabaseMenu extends Menu {
