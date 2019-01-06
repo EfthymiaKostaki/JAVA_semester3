@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 public class DatabaseMenu extends Menu {
 
 	//Singleton Pattern to ensure that only one object is created
-	private static final DatabaseMenu databaseMenu =
+    private static final DatabaseMenu databaseMenu =
 					new DatabaseMenu("Database Main Menu");
 	private final Dimension idealButtonSize = new Dimension(140, 25);
 	private	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -41,13 +41,13 @@ public class DatabaseMenu extends Menu {
 	private JPanel databasePanel;
 	private JPanel sidePanel;
 
-
 	private DatabaseMenu(String tableName) {
-		super(tableName);
+	    super(tableName);
 	    super.initializeGUI();;
-		setLayout(new FlowLayout(FlowLayout.CENTER, 0, screenSize.height / 3));
-		add(databaseMenu());
-		setVisible(true);
+	    setLayout(new FlowLayout(FlowLayout.CENTER, 0, screenSize.height / 3));
+	    add(databaseMenu());
+	    setVisible(true);
+
 	}
 
 	public static DatabaseMenu getDatabaseMenuInstance() {
@@ -118,7 +118,9 @@ public class DatabaseMenu extends Menu {
 		String tableName = JOptionPane.showInputDialog(this,
 				"Please name the table");
 		if (Standards.isNameValid(tableName)) {
-			if(Database.getDatabaseInstance().checkForDuplicateTables(tableName)) {
+			if(Database.getDatabaseInstance()
+			    .checkForDuplicateTables(tableName)) {
+
 				Database.getDatabaseInstance().addTable(new Table(tableName));
 				setVisible(false);
 			}
@@ -136,10 +138,10 @@ public class DatabaseMenu extends Menu {
 		if (Database.getDatabaseInstance().isThereAnyTable()) {
 		    super.refresh(sidePanel);
 			String message = "Select a table to edit";
-			listOfTables = new JComboBox<Object>(Database
-							.getDatabaseInstance()
-							.getTables()
-							.toArray());
+			listOfTables = new JComboBox<Object>(
+			    Database.getDatabaseInstance()
+				.getTables()
+				.toArray());
 
 			listOfTables.setBackground(Color.WHITE);
 			editButton = new JButton("Edit");
@@ -160,8 +162,9 @@ public class DatabaseMenu extends Menu {
 	private void editButtonActionPerformed(ActionEvent e) {
 		super.refresh(sidePanel);
 		int index = listOfTables.getSelectedIndex();
-		new TableMenu(Database.getDatabaseInstance().getTable(index),
-						listOfTables.getSelectedItem().toString());
+		new TableMenu(
+		    Database.getDatabaseInstance().getTable(index),
+		    listOfTables.getSelectedItem().toString());
 	}
 
 	/**
@@ -211,7 +214,8 @@ public class DatabaseMenu extends Menu {
 		if (Database.getDatabaseInstance().isThereAnyTable()) {
 			super.refresh(sidePanel);
 			if (Standards.verify()) {
-				for (int i = 0; i < Database.getDatabaseInstance().numberOfTables(); i++) {
+			    int end = Database.getDatabaseInstance().numberOfTables();
+				for (int i = 0; i < end; i++) {
 					Database.getDatabaseInstance().getTable(i).clearTable();
 				}
 				Database.getDatabaseInstance().getTables().clear();
@@ -224,7 +228,6 @@ public class DatabaseMenu extends Menu {
 	}
 
 	/**
-	 *
 	 * @param message
 	 * @param listOfTables
 	 * @param actionButton
@@ -232,10 +235,14 @@ public class DatabaseMenu extends Menu {
 	 * as well as a button that declares the action to be applied
 	 * on the chosen table.
 	 */
-	private JPanel tableDestiny(String message, JComboBox<Object> listOfTables, JButton actionButton) {
-		sidePanel = new JPanel();
-		sidePanel.setBackground(Color.WHITE);
-		sidePanel.setLayout(new FlowLayout());
+	private JPanel tableDestiny(
+	    String message,
+	    JComboBox<Object> listOfTables,
+	    JButton actionButton) {
+
+        sidePanel = new JPanel();
+        sidePanel.setBackground(Color.WHITE);
+	    sidePanel.setLayout(new FlowLayout());
 		JLabel label = new JLabel(message);
 		sidePanel.add(label);
 		sidePanel.add(listOfTables);
