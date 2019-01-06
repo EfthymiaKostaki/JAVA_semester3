@@ -5,7 +5,8 @@ package database;
 * @author Paris Mpampaniotis
 * @author Theodosis Tsaklanos
 * @author Anna Maria Mersinoglou
-* @version 1.0
+* @author Apostolis Moustakis
+* @version 1.1
 */
 
 public class Field {
