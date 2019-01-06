@@ -11,6 +11,7 @@ import javax.swing.JPanel;
  * Superclass whose members are going to be inherited
  * both by TableMenu and DatabaseMenu classes.
  * @author Theodosis Tsaklanos
+ * @version 1.1
  *
  */
 public class Menu extends JFrame {
