@@ -20,7 +20,7 @@ import javax.swing.JRadioButton;
 * These tasks refer to add fields, show fields, add entries, show entries to database or exit.
 *
 *@author DetIncredibles6
-*@version 1.0
+*@version 1.1
 */
 public class TableMenu extends JFrame {
 
