@@ -49,8 +49,6 @@ public class Field {
         return true;
     }
 
-
-	
     /**
     * @return a String representation of a Field type object.
     */
