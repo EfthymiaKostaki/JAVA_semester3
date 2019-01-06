@@ -1,139 +1,116 @@
 package database;
 
 import java.util.ArrayList;
-/** 
-*Edits the Table which contains all the Field and Entry type objects the user entered.
-*
-*@author DetIncredibles6
-*@version 1.0
-*/
 
+/**
+ * @author Theodosis Tsaklanos
+ */
 public class Table {
 
-    private ArrayList<Field> fields = new ArrayList<Field>(); //stores all Field type objects
-    private ArrayList<Entry> entries = new ArrayList<Entry>(); //stores all Entry type objects 
-    private String tableName;
- 
-    /**
-    *Class Constructor. 
-    *@param tableName
-    */
-    
-    public Table(String tableName) {
-        this.tableName = tableName;
-        new TableMenu(this,tableName);
-    }
-    
-    /** 
-    *Getter for Table's name.
-    *@return tableName
-    */
-    
-    public String getTableName() {
-        return tableName;
-    }
-    
-    /**
-    *Sets table name.
-    *@param tableName
-    */
-    
-    public void setTableName(String tableName) { //works as a rename method
-        this.tableName = tableName;
-    }
-    
-    /**
-    *Used to add Fields.
-    *@param field a new field added 
-    */
-    
-    public void addField(Field field) {
-        fields.add(field);
-    }
-    
-    /**
-    *Used to add Entries.
-    *@param entry a new entry added 
-    */
-    
-    public void addEntry(Entry entry) {
-        entries.add(entry);
-    }
+	/** Stores all Field type objects */
+	private ArrayList<Field> fields = new ArrayList<Field>(); //stores all Field type objects
 
-    /** 
-    * @return a String that represents all the entries (tuples) of the database
-    */
-    
-    public ArrayList<Entry> getEntries() {
-        return entries;
-    }
-    
-    /**
-    *Getter for Entries.
-    *@param index a certain position
-    *@return entries in this position
-    */
-    
-    public Entry getEntry(int index) {
-        return entries.get(index);
-    }
-    
-    /**
-    *Gets fields from a certain position.
-    *@param index a certain position
-    *@return fields in this position 
-    */
-    
-    public Field getField(int index) {
-        return fields.get(index);
-    }
-    
-    /**
-    *@return fields from ArrayList
-    */
-    
-    public ArrayList<Field> getFields() {
-        return fields;
-    }
- 
-    /**
-    * Clears the arrayLists that contain the fields.
-    * Clears the entries of the certain table.
-    */
-    
-    public void clearTable() {
-        fields.clear();
-        entries.clear();
-    }
+	/** Stores all Entry type objects */
+	private ArrayList<Entry> entries = new ArrayList<Entry>(); //stores all Entry type objects
 
-    /**
-    * @return true if the table has one or more fields
-    * Otherwise this method returns false.
-    */
-    
-    public boolean isThereAnyField() {
-        if (getFields().size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-    * @return a String representation of a certain Table 
-    */
-    
-    @Override
-    public String toString() {
-        return tableName.toString();
-    }
+	private String tableName;
 
-    /**
-    * 
-    * @return an Object[] that will be used to populate a JList
-    */
-    
-    public ArrayList<Entry> getListEntries() {
-        return entries;
-    }
+	/**
+	 * Creates Table type objects that represent
+	 * a table of the database.
+	 * @param tableName
+	 */
+	public Table(String tableName) {
+		this.tableName = tableName;
+		new TableMenu(this,tableName);
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	/**
+	 * Renames the Table object.
+	 * @param tableName
+	 */
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	@Override
+	public String toString() {
+		return tableName.toString();
+	}
+
+	/**
+	 * Adds a field (column) to this table.
+	 * @param field
+	 */
+	public void addField(Field field) {
+		fields.add(field);
+	}
+
+	/**
+	 * Adds an entry (row) to this table.
+	 * @param entry
+	 */
+	public void addEntry(Entry entry) {
+		entries.add(entry);
+	}
+
+	/**
+	 * Returns all the Entry objects (rows)
+	 * of this table.
+	 */
+	public ArrayList<Entry> getEntries(){
+		return entries;
+	}
+
+	public Entry getEntry(int index) {
+		return entries.get(index);
+	}
+
+	/**
+	 * Returns the fields (column names) of
+	 * this table.
+	 */
+	public ArrayList<Field> getFields(){
+		return fields;
+	}
+
+	public Field getField(int index) {
+		return fields.get(index);
+	}
+
+	/**
+	 * Clears the Arraylists that contain the fields
+	 * and the entries of the this table.
+	 */
+	public void clearTable() {
+		fields.clear();
+		entries.clear();
+	}
+
+	/**
+	 *
+	 * @return true if the table has one or more fields.
+	 * Otherwise, returns false.
+	 */
+	public boolean isThereAnyField() {
+	    if (getFields().size() > 0) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+
+
+	/**
+	 * Returns an Object[] that will be used
+	 * to populate a JList
+	 */
+	public Object[] getListEntries(){
+	    return entries.toArray();
+	}
+
 }
