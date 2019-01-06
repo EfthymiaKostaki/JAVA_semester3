@@ -4,7 +4,7 @@ package database;
 *Main class method. 
 *
 *@author DetIncredibles6
-*@version 1.0
+*@version 1.1
 */
 
 public class Main {
