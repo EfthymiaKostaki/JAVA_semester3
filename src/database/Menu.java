@@ -47,10 +47,10 @@ public class Menu extends JFrame {
      */
     public void terminateAll() {
         addWindowListener(new WindowAdapter() {
-        	@Override
-			public void windowClosing(WindowEvent click) {
-        		System.exit(0);
-        	}
+            @Override
+	    public void windowClosing(WindowEvent click) {
+            	System.exit(0);
+            }
         });
     }
 
@@ -61,12 +61,12 @@ public class Menu extends JFrame {
      */
     public void refresh(JPanel panel) {
     	if (panel != null) {
-    		if (panel.isDisplayable()) {
-    			remove(panel);
-    			panel.revalidate();
-    			validate();
-    			repaint();
-    		}
+    	    if (panel.isDisplayable()) {
+    		remove(panel);
+    		panel.revalidate();
+    		validate();
+    		repaint();
+    	    }
     	}
     }
 
