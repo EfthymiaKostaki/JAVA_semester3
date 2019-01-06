@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * @author Efthymia Kostaki
  * @author Paris Mpampaniotis
  * @author Theodosis Tsaklanos
+ * @author Anna Maria Mersinoglou
  *
  */
 public class Entry {
