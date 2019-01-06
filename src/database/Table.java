@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author Theodosis Tsaklanos
+ * @version 1.1
  */
 public class Table {
 
