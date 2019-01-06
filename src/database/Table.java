@@ -8,24 +8,25 @@ import java.util.ArrayList;
  */
 public class Table {
 
-	/** Stores all Field type objects */
 	private ArrayList<Field> fields = new ArrayList<Field>(); //stores all Field type objects
 
-	/** Stores all Entry type objects */
 	private ArrayList<Entry> entries = new ArrayList<Entry>(); //stores all Entry type objects
 
 	private String tableName;
 
 	/**
-	 * Creates Table type objects that represent
-	 * a table of the database.
+	 * Creates Table type objects that represent a table of the database.
 	 * @param tableName
 	 */
 	public Table(String tableName) {
 		this.tableName = tableName;
 		new TableMenu(this,tableName);
 	}
-
+	
+	/**
+	* Getter for Table's name.
+	* @return tableName
+	*/
 	public String getTableName() {
 		return tableName;
 	}
@@ -37,7 +38,10 @@ public class Table {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-
+	
+	/**
+	* @return a string representation of table's name
+	*/
 	@Override
 	public String toString() {
 		return tableName.toString();
@@ -60,25 +64,31 @@ public class Table {
 	}
 
 	/**
-	 * Returns all the Entry objects (rows)
-	 * of this table.
+	 * @return all the Entry objects (rows) of this table
 	 */
 	public ArrayList<Entry> getEntries(){
 		return entries;
 	}
-
+	
+	/**
+	 * @param index
+	 * @return a specific entry(row)
+	 */
 	public Entry getEntry(int index) {
 		return entries.get(index);
 	}
 
 	/**
-	 * Returns the fields (column names) of
-	 * this table.
+	 * @return the fields (column names) of this table
 	 */
 	public ArrayList<Field> getFields(){
 		return fields;
 	}
-
+	
+	/**
+	 * @param index
+	 * @return a specific field(column)
+	 */
 	public Field getField(int index) {
 		return fields.get(index);
 	}
@@ -93,7 +103,6 @@ public class Table {
 	}
 
 	/**
-	 *
 	 * @return true if the table has one or more fields.
 	 * Otherwise, returns false.
 	 */
