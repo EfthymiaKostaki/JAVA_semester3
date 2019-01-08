@@ -182,7 +182,7 @@ public class TableMenu extends Menu {
         					+ "The Key Identifier is: "
         					+ transfer.uniqueKeyIdentifier);
         	JOptionPane.showMessageDialog(null,
-        		    "The Key Identifier is used"
+        		    "The Key Identifier is used "
         		    + "to mark every file created by this database.");
         } else {
         	JOptionPane.showMessageDialog(
