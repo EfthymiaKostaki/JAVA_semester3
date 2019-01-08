@@ -35,7 +35,6 @@ public class Entry {
 	}
 
 	/**
-	 *
 	 * @return an entire row of the database (an entry)
 	 */
 	public ArrayList<Object> getEntryArguments() {
