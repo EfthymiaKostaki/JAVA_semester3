@@ -65,7 +65,8 @@ public class Database {
      */
     public boolean checkForDuplicateTables(String tableName) {
         if (tables.toString().contains(tableName)) {
-            JOptionPane.showMessageDialog(null, "You can't have a table name more than once");
+        JOptionPane.showMessageDialog(
+                null, "You can't have two tables with the same name!");
             return false;
         } else {
             return true;
