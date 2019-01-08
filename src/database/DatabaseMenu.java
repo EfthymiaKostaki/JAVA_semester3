@@ -3,12 +3,15 @@ package database;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -16,26 +19,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * Creates the menu of the database.
+ * Creates the main menu of the database.
  * Actions such as creating,editing or deleting a table
  * are managed by this window.
  * @author Theodosis Tsaklanos
  * @version 1.1
- *
  */
 public class DatabaseMenu extends Menu {
+
 
 	//Singleton Pattern to ensure that only one object is created
     private static final DatabaseMenu databaseMenu =
 					new DatabaseMenu("Database Main Menu");
-	private final Dimension idealButtonSize = new Dimension(140, 25);
-	private	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private JButton createNewTableButton;
-	private JButton editExistentTableButton;
-	private JButton editButton;
-	private JButton deleteExistentTableButton;
-	private JButton deleteButton;
+    private final Dimension idealButtonSize = new Dimension(140, 30);
+    private	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private JButton createNewTableButton;
+    private JButton editExistentTableButton;
+    private JButton editButton;
+    private JButton deleteExistentTableButton;
+    private JButton deleteButton;
 	private JButton deleteDatabaseButton;
+	private JButton importTableButton;
 	private JComboBox<Object> listOfTables;
 	private JLabel welcomeLabel;
 	private JLabel dateLabel;
@@ -48,7 +52,6 @@ public class DatabaseMenu extends Menu {
 	    setLayout(new FlowLayout(FlowLayout.CENTER, 0, screenSize.height / 3));
 	    add(databaseMenu());
 	    setVisible(true);
-
 	}
 
 	public static DatabaseMenu getDatabaseMenuInstance() {
@@ -72,28 +75,45 @@ public class DatabaseMenu extends Menu {
 		dateLabel = new JLabel("<html>Last access at:"
 				+ "<br/>" + new Date().toString() + "</html>");
 
-		createNewTableButton = new JButton("Create a new table");
+		importTableButton = new JButton("Import a Table");
+		importTableButton.setMaximumSize(idealButtonSize);
+		importTableButton.addActionListener(this::
+		    importTableButtonActionPerformed);
+		importTableButton.setIcon(
+		        new ImageIcon(addButtonIcon("importTable.png")));
+
+		createNewTableButton = new JButton("Create a Table");
 		createNewTableButton.setMaximumSize(idealButtonSize);
 		createNewTableButton.addActionListener(this::
 			createNewTableButtonActionPerformed);
+		createNewTableButton.setIcon(
+		        new ImageIcon(addButtonIcon("plusIcon.png")));
 
-		editExistentTableButton = new JButton("Edit a table");
+		editExistentTableButton = new JButton("Update a Table");
 		editExistentTableButton.setMaximumSize(idealButtonSize);
 		editExistentTableButton.addActionListener(this::
 			editExistentTableButtonActionPerformed);
+		editExistentTableButton.setIcon(
+		        new ImageIcon(addButtonIcon("updateTableIcon.png")));
 
-		deleteExistentTableButton = new JButton("Delete a table");
+		deleteExistentTableButton = new JButton("Delete a Table");
+		deleteExistentTableButton.setMaximumSize(idealButtonSize);
 		deleteExistentTableButton.addActionListener(this::
 			deleteExistentTableButtonActionPerformed);
-		deleteExistentTableButton.setMaximumSize(idealButtonSize);
+		deleteExistentTableButton.setIcon(
+		        new ImageIcon(addButtonIcon("deleteTableIcon.png")));
 
-		deleteDatabaseButton = new JButton("Delete database");
+		deleteDatabaseButton = new JButton("Clear Database");
 		deleteDatabaseButton.setMaximumSize(idealButtonSize);
 		deleteDatabaseButton.addActionListener(this::
 			deleteDatabaseButtonActionPerformed);
+		deleteDatabaseButton.setIcon(
+		        new ImageIcon(addButtonIcon("deleteDatabaseIcon.png")));
 
 		databasePanel.add(welcomeLabel);
 		databasePanel.add(Box.createVerticalStrut(25));
+	    databasePanel.add(importTableButton);
+	    databasePanel.add(Box.createVerticalStrut(15));
 		databasePanel.add(createNewTableButton);
 		databasePanel.add(Box.createVerticalStrut(15));
 		databasePanel.add(editExistentTableButton);
@@ -106,6 +126,26 @@ public class DatabaseMenu extends Menu {
 
 		return databasePanel;
 
+	}
+
+	/**Adds icons to the JButtons of the main menu */
+	private Image addButtonIcon(String icon) {
+	    Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    URL url = getClass().getResource(icon);
+	    return toolkit.getImage(url);
+	}
+
+	/**Allows the user to import a Table
+	 * {@link database.TransferData#importFile(). */
+	private void importTableButtonActionPerformed(ActionEvent e) {
+	    super.refresh(sidePanel);
+	    String importFile = JOptionPane.showInputDialog("Import an Excel file:"
+	                    + "\n"
+	                    + "*Note: Do NOT add .xls extension");
+	    if (Standards.isNameValid(importFile)) {
+	        TransferData transfer = new TransferData(importFile);
+	        transfer.importFile();
+	    }
 	}
 
 	/**
@@ -122,7 +162,9 @@ public class DatabaseMenu extends Menu {
 			if(Database.getDatabaseInstance()
 			    .checkForDuplicateTables(tableName)) {
 
-				Database.getDatabaseInstance().addTable(new Table(tableName));
+			    Table table = new Table(tableName);
+				Database.getDatabaseInstance().addTable(table);
+				new TableMenu(table, tableName);
 				setVisible(false);
 			}
 		}
@@ -162,10 +204,10 @@ public class DatabaseMenu extends Menu {
 	 */
 	private void editButtonActionPerformed(ActionEvent e) {
 		super.refresh(sidePanel);
-		int index = listOfTables.getSelectedIndex();
-		new TableMenu(
-		    Database.getDatabaseInstance().getTable(index),
-		    listOfTables.getSelectedItem().toString());
+		int listOfTablesIndex = listOfTables.getSelectedIndex();
+		Table table = Database.getDatabaseInstance().getTable(listOfTablesIndex);
+		new TableMenu(table,listOfTables.getSelectedItem().toString());
+		setVisible(false);
 	}
 
 	/**
@@ -201,9 +243,12 @@ public class DatabaseMenu extends Menu {
 	 */
 	private void deleteButtonActionPerformed(ActionEvent e) {
 		super.refresh(sidePanel);
-		int index = listOfTables.getSelectedIndex();
-		Database.getDatabaseInstance().getTable(index).clearTable();
-		Database.getDatabaseInstance().removeTable(index);
+		if (Standards.verify()) {
+			int index = listOfTables.getSelectedIndex();
+			Database.getDatabaseInstance().getTable(index).clearTable();
+			Database.getDatabaseInstance().removeTable(index);
+			System.out.println("Table was deleted succesfully!");
+		}
 	}
 
 	/**

@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 /**
  * Superclass whose members are going to be inherited
  * both by TableMenu and DatabaseMenu classes.
+ * Represents a Menu.
  * @author Theodosis Tsaklanos
  * @version 1.1
- *
  */
 public class Menu extends JFrame {
 
@@ -25,52 +25,46 @@ public class Menu extends JFrame {
     	this.tableName = tableName;
     }
 
-    public Menu(Table table, String tableName) {
-        super(tableName);
-        this.table = table;
-        this.tableName = tableName;
-    }
-
     /**
-     *
-     * Defines fundamental things concerning a JFrame component.
-     *
+     * Defines fundamental things concerning a JFrame component
+     * such as its size and background color.
      */
     public void initializeGUI() {
         getContentPane().setBackground(Color.WHITE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        terminateAll();
+        termination();
     }
 
     /**
      * Terminates everything in the current JVM.
      */
-    public void terminateAll() {
+    public void termination() {
         addWindowListener(new WindowAdapter() {
-            @Override
-	    public void windowClosing(WindowEvent click) {
-            	System.exit(0);
-            }
+        	@Override
+			public void windowClosing(WindowEvent click) {
+        		System.exit(0);
+        	}
         });
     }
 
     /**
      * Removes a JPanel component from a JFrame component.
-     * @param panel
+     * @param panel - the panel to be removed
      *
      */
     public void refresh(JPanel panel) {
     	if (panel != null) {
     	    if (panel.isDisplayable()) {
-    		remove(panel);
-    		panel.revalidate();
-    		validate();
-    		repaint();
+    	        remove(panel);
+    	        panel.revalidate();
+    	        validate();
+    	        repaint();
     	    }
     	}
     }
 
+    /**Returns the name of the table */
     public String getTableName() {
         return tableName;
     }

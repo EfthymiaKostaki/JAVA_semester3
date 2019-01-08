@@ -2,31 +2,34 @@ package database;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
+ * A Table object represent a data structure with rows and columns
+ * that exists in a database.
  * @author Theodosis Tsaklanos
+ * @author Paris Mpampaniotis
  * @version 1.1
  */
 public class Table {
 
-	private ArrayList<Field> fields = new ArrayList<Field>(); //stores all Field type objects
+	/** Stores all Field type objects of this table.*/
+	private ArrayList<Field> fields = new ArrayList<Field>();
 
-	private ArrayList<Entry> entries = new ArrayList<Entry>(); //stores all Entry type objects
+	/** Stores all Entry type objects of this table.*/
+	private ArrayList<Entry> entries = new ArrayList<Entry>();
 
 	private String tableName;
 
 	/**
-	 * Creates Table type objects that represent a table of the database.
+	 * Creates Table type objects that represent
+	 * a table of the database.
 	 * @param tableName
 	 */
 	public Table(String tableName) {
 		this.tableName = tableName;
-		new TableMenu(this,tableName);
 	}
-	
-	/**
-	* Getter for Table's name.
-	* @return tableName
-	*/
+
 	public String getTableName() {
 		return tableName;
 	}
@@ -38,10 +41,7 @@ public class Table {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-	
-	/**
-	* @return a string representation of table's name
-	*/
+
 	@Override
 	public String toString() {
 		return tableName.toString();
@@ -64,33 +64,43 @@ public class Table {
 	}
 
 	/**
-	 * @return all the Entry objects (rows) of this table
+	 * @return all the Entry objects (rows)
+	 * of this table.
 	 */
 	public ArrayList<Entry> getEntries(){
 		return entries;
 	}
-	
-	/**
-	 * @param index
-	 * @return a specific entry(row)
-	 */
+
 	public Entry getEntry(int index) {
 		return entries.get(index);
 	}
 
 	/**
-	 * @return the fields (column names) of this table
+	 * @return the number of entries (rows)
+	 * of this table
+	 */
+	public int numberOfEntries() {
+	    return entries.size();
+	}
+
+	/**
+	 * @return the fields (column names) of
+	 * this table.
 	 */
 	public ArrayList<Field> getFields(){
 		return fields;
 	}
-	
-	/**
-	 * @param index
-	 * @return a specific field(column)
-	 */
+
 	public Field getField(int index) {
 		return fields.get(index);
+	}
+
+	/**
+	 * @return the number of fields (columns)
+	 * of this table
+	 */
+	public int numberOfFields() {
+	    return fields.size();
 	}
 
 	/**
@@ -103,6 +113,7 @@ public class Table {
 	}
 
 	/**
+	 *
 	 * @return true if the table has one or more fields.
 	 * Otherwise, returns false.
 	 */
@@ -114,13 +125,17 @@ public class Table {
 	    }
 	}
 
-
-	/**
-	 * Returns an Object[] that will be used
-	 * to populate a JList
-	 */
-	public Object[] getListEntries(){
-	    return entries.toArray();
+	/** When a new Field (column) is added to the database, all the existent
+	 * records' value for this Field is set to NULL.*/
+	public void checkForUnfilledElements(Table table, String fieldName) {
+	    for (int q = 0; q < table.numberOfEntries(); q++) {
+	        if (table.getEntry(q).getEntryArguments().size() < table.numberOfFields()) {
+	            JOptionPane.showMessageDialog(null,
+	                    "All your inserted entries now have a "
+	                    + "NULL value for field: " + fieldName);
+	            table.getEntry(q).getEntryArguments().add("NULL");
+	        }
+	    }
 	}
 
 }

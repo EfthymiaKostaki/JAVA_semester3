@@ -7,9 +7,8 @@ import javax.swing.JOptionPane;
 /**
  * Database is the class that holds responsibility for every table that exists
  * in a database.
- *
- * @author Theodosis Tsaklanos
  * @author Paris Mpampaniotis
+ * @author Theodosis Tsaklanos
  * @version 1.1
  */
 public class Database {
@@ -23,7 +22,6 @@ public class Database {
     /**
      * Having more than one Database objects is prevented and therefore the unique
      * object that exists needs to be returned in this way
-     *
      * @return a database object
      */
     // Singleton pattern
@@ -33,7 +31,6 @@ public class Database {
 
     /**
      * Adds a Table object to the ArrayList that stores every Table object.
-     *
      * @param table
      */
     public void addTable(Table table) {
@@ -42,7 +39,6 @@ public class Database {
 
     /**
      * Removes a specific Table object from the ArrayList that stores the tables.
-     *
      * @param index
      */
     public void removeTable(int index) {

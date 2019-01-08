@@ -1,62 +1,53 @@
 package database;
 
+import javax.swing.JOptionPane;
 /**
-* Used for anything in relation with Fields.  
-* @author Paris Mpampaniotis
-* @author Theodosis Tsaklanos
-* @author Anna Maria Mersinoglou
-* @author Apostolis Moustakis
-* @version 1.1
-*/
-
+ * A Field object is a data structure for a single piece of data.
+ * It is connected to the data inserted in a specific row.
+ * @author DetIncredibles6
+ * @version 1.1
+ */
 public class Field {
 
-    private Object fieldName;
-	
-    /**
-    *Constructs Field type objects (column name).
-    *@param fieldName
-    */
-    public Field(Object fieldName) {
-        this.fieldName = fieldName;
-    }
-	
-    /** 
-    *Returns the name of the field.
-    */
-    public Object getFieldName() {
-        return fieldName;
-    }
-	
-    /** 
-    *Sets the new field name.
-    *@param name
-    */
-    public void setFieldName(Object name) {
-        this.fieldName = name;
-    }
-	
-    /** 
-    *Checks if the given name of a field already exists.
-    *@param table the Table object that already exists.
-    *@param givenName the new name.
-    *@return false if the given name already exists as a field or true otherwise.
-    */
-    public static boolean checkForPossibleDuplicate(Table table, String givenName) {
-        for (int i = 0; i < table.getFields().size(); i++) {
-            if (givenName.equals(table.getField(i).toString())) {
-                return false;
-            }
-        }
-        return true;
-    }
+	private Object fieldName;
 
-    /**
-    * @return a String representation of a Field type object.
-    */
-    @Override
-    public String toString() {
-        return fieldName.toString();
-    }
+	public Field(Object fieldName) {
+		this.fieldName = fieldName;
+	}
+
+	public Object getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(Object name) {
+		this.fieldName = name;
+	}
+
+	/**
+	 * Checks if the field the user wants to add already exists or not
+	 * @param table
+	 * @param givenName
+	 * @return true if the the certain field does not exist or false
+	 * in case it exists
+	 */
+	public static boolean checkForDuplicate(Table table, String givenName) {
+		for(int i = 0; i < table.getFields().size(); i++) {
+			if (givenName.equals(table.getField(i).toString())) {
+				JOptionPane.showMessageDialog(null,
+						"You can't have the same field twice");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Used to return a String representation of a Field type object
+	 * @return
+	 */
+	@Override
+	public String toString() {
+		return fieldName.toString();
+	}
 
 }

@@ -1,22 +1,19 @@
 package database;
 import java.util.ArrayList;
+
 /**
- *
+ * An Entry object is supposed to be a record (row)
+ * in the database.
  * @author Efthymia Kostaki
  * @author Paris Mpampaniotis
  * @author Theodosis Tsaklanos
- * @author Anna Maria Mersinoglou
- * @author Apostolis Moustakis
  * @version 1.1
- *
  */
 public class Entry {
+
+	/**Stores the elements of this entry object (row) */
 	private ArrayList<Object> entryArguments = new ArrayList<Object>();
 
-	/**
-	 * Constructor
-	 * @param entryArguments, an arraylist of Object type elements each of which is corresponds to a field
-	 */
 	public Entry(ArrayList<Object> entryArguments) {
 		this.entryArguments = new ArrayList<Object> (entryArguments);
 	}
@@ -26,7 +23,7 @@ public class Entry {
 	 * @param entries
 	 * @param table
 	 * @return true if an identical entry already exists or false if no
-	 * identical entry was found
+	 * identical entry was found.
 	 */
 	public static boolean checkIfSameEntries(ArrayList<Object> entries, Table table) {
 		for (int i = 0; i < table.getEntries().size(); i++) {
@@ -51,6 +48,11 @@ public class Entry {
 	 */
 	public Object getEntryArgument(int index) {
 		return entryArguments.get(index);
+	}
+
+	/** Changes a specific cell of the database. */
+	public void setEntryArgument(int index, Object element) {
+	    entryArguments.set(index, element);
 	}
 
 
