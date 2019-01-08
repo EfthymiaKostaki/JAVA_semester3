@@ -34,6 +34,37 @@ public class TransferData {
         this.fileName = fileName;
     }
 
+        /**Reads only the first line of the .xlsx and checks if the key
+     * exists or not.
+     * {@link database.TransferData#uniqueKeyIdentifier}
+     * @return true if the key exists or false if it does not exist.
+     */
+    protected boolean checkForUniqueKeyIdentifier() {
+    	try {
+			in = new BufferedReader(new FileReader(fileName + ".xls"));
+			String line;
+			try {
+				line = in.readLine();
+				if (line.equals(uniqueKeyIdentifier)) {
+					return true;
+				} else {
+                	JOptionPane.showMessageDialog(null,
+                        			"This file does not comply with "
+                        			+ "this database's standards.\n"
+                        			+"The Key Identifier was not found.\n"
+                        			+ "The correct key Identifier is:"
+                        			+ uniqueKeyIdentifier);
+                	return false;
+				}
+			} catch(IOException e) {
+				JOptionPane.showMessageDialog(null, e.toString());
+				return false;
+			}
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "File not found!");
+			return false;
+		}
+    }
     /**
      * Imports an .xls file in order to fill the database. <br> <br>
      * <b>Note: </b> The .xls file must contain the key identifier
@@ -42,30 +73,31 @@ public class TransferData {
     protected void importFile() {
         try {
             in = new BufferedReader(new FileReader(fileName + ".xls"));
+            JOptionPane.showMessageDialog(
+            				null, "The table was imported!");
             Table table = new Table(fileName);
             Database.getDatabaseInstance().addTable(table);
             String line;
             int linesRead = 0;
             try {
                 while ((line = in.readLine()) != null) {
-                    if (linesRead == 0) {
-                        if(!line.equals(uniqueKeyIdentifier)) {
-                            break;
-                        }
-                    }
+                	linesRead++;
+                	if (linesRead == 1) {
+                		//do nothing
+                		//this is the key
+                	}
                     ArrayList<Object> entryArguments = new ArrayList<Object>();
                     StringTokenizer st = new StringTokenizer(line, "\t");
                     while (st.hasMoreTokens()) {
-                        if (linesRead == 1) {
+                        if (linesRead == 2) {
                             table.addField(new Field(st.nextToken()));
                         } else {
                             entryArguments.add(st.nextElement());
                         }
                     }
-                    if (linesRead > 1) {
+                    if (linesRead > 2) {
                         table.addEntry(new Entry(entryArguments));
                     }
-                    linesRead++;
                 }
                 in.close();
             } catch (IOException e) {
