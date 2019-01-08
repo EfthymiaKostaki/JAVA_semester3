@@ -27,10 +27,10 @@ import javax.swing.JPanel;
  */
 public class DatabaseMenu extends Menu {
 
-
-	//Singleton Pattern to ensure that only one object is created
+	/** Singleton Pattern to ensure that only one object is created.*/
     private static final DatabaseMenu databaseMenu =
-					new DatabaseMenu("Database Main Menu");
+    	    new DatabaseMenu("Database Main Menu");
+
     private final Dimension idealButtonSize = new Dimension(140, 30);
     private	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private JButton createNewTableButton;
@@ -54,6 +54,8 @@ public class DatabaseMenu extends Menu {
 	    setVisible(true);
 	}
 
+	/**Returns the unique object of DatabaseMenu that exists.
+	 * {@link database.DatabaseMenu#databaseMenu}.*/
 	public static DatabaseMenu getDatabaseMenuInstance() {
 		return databaseMenu;
 	}
