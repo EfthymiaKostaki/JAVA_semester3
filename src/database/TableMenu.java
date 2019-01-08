@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -48,7 +49,8 @@ public class TableMenu extends Menu {
 
 	private ButtonGroup groupOfButtons;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private ImageIcon icon;
+	private ImageIcon exportIcon;
+	private ImageIcon searchIcon;
 	private JButton okButton, goBackButton;
 	private JButton exportButton;
 	private JLabel searchText;
@@ -64,7 +66,11 @@ public class TableMenu extends Menu {
     private Search explorer;
     private String givenFieldName;
     private Table table;
-    private URL iconURL;
+    private URL searchIconURL;
+    private URL exportIconURL;
+
+
+
 
 	public TableMenu(Table table, String tableName) {
 		super(tableName);
@@ -83,10 +89,12 @@ public class TableMenu extends Menu {
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 		menuPanel.setBackground(Color.WHITE);
 
-		iconURL = getClass().getResource("searchIcon.png");
-		icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(iconURL));
+		searchIconURL = getClass().getResource("searchIcon.png");
+		searchIcon = new ImageIcon(Toolkit
+		        .getDefaultToolkit()
+				.getImage(searchIconURL));
 		searchText = new JLabel("Search");
-		searchText.setIcon(icon);
+		searchText.setIcon(searchIcon);
 		searchText.setHorizontalTextPosition(JLabel.LEFT);
 		searchBar = new JTextField(20);
 		searchBar.addKeyListener(new KeyAdapter() {
@@ -131,7 +139,12 @@ public class TableMenu extends Menu {
 			okButtonActionPerformed);
 
 
+		exportIconURL = getClass().getResource("exportIcon.png");
+		exportIcon = new ImageIcon(Toolkit
+				.getDefaultToolkit()
+				.getImage(exportIconURL));
 		exportButton = new JButton("Export table");
+		exportButton.setIcon(exportIcon);
 		exportButton.addActionListener(this::
 			exportButtonActionPerformed);
 
@@ -174,16 +187,14 @@ public class TableMenu extends Menu {
 
     /**Invoked when the users clicks the "Export Table" button.*/
     private void exportButtonActionPerformed(ActionEvent e) {
+    	super.refresh(proceduresPanel);
         //there is no reason to export an empty table.
     	if(table.isThereAnyField()) {
         	TransferData transfer = new TransferData(table.toString());
-        	transfer.exportFile(table);
-        	JOptionPane.showMessageDialog(null, "The table was exported!\n"
-        					+ "The Key Identifier is: "
-        					+ transfer.uniqueKeyIdentifier);
-        	JOptionPane.showMessageDialog(null,
-        		    "The Key Identifier is used "
-        		    + "to mark every file created by this database.");
+        	File destination = transfer.exportFile(this,table);
+        	if (destination != null) {
+        		transfer.startWritingFile(table, destination);
+        	}
         } else {
         	JOptionPane.showMessageDialog(
         		    null, "You cannot export an empty table!");

@@ -1,6 +1,7 @@
 package database;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,7 +10,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Exports data of Database's tables to Excel Sheets,
@@ -27,21 +31,41 @@ public class TransferData {
     protected final String uniqueKeyIdentifier = "ad36$plw";
 
     private String fileName;
-
     private BufferedReader in;
+	private JFileChooser jfc;
+
+	public TransferData() {
+
+	}
 
     public TransferData(String fileName) {
         this.fileName = fileName;
     }
 
-        /**Reads only the first line of the .xlsx and checks if the key
+    /**
+     * Allows the user to choose a .xls file that contains a table's data
+     * from a specific disk, directory and/or folder.
+     * @param frame - the JFrame where the FileChooser will be displayed.
+     */
+    protected File importFile(JFrame frame) {
+    	jfc = new JFileChooser();
+    	int open = jfc.showOpenDialog(frame);
+    	File selectedFile = null;
+    	if (open == JFileChooser.APPROVE_OPTION) {
+    		selectedFile = jfc.getSelectedFile();
+    	}
+    	return selectedFile;
+    }
+
+    /**Reads only the first line of the .xlsx and checks if the key
      * exists or not.
      * {@link database.TransferData#uniqueKeyIdentifier}
      * @return true if the key exists or false if it does not exist.
+     * @param checkFile - the file that is going to be searched
      */
-    protected boolean checkForUniqueKeyIdentifier() {
+    protected boolean checkForUniqueKeyIdentifier(File checkFile) {
     	try {
-			in = new BufferedReader(new FileReader(fileName + ".xls"));
+			in = new BufferedReader(new FileReader(checkFile.toString()));
 			String line;
 			try {
 				line = in.readLine();
@@ -65,17 +89,20 @@ public class TransferData {
 			return false;
 		}
     }
+
     /**
      * Imports an .xls file in order to fill the database. <br> <br>
      * <b>Note: </b> The .xls file must contain the key identifier
      * {@link database.TransferData#uniqueKeyIdentifier}.
+     * @param readFile - the file that is going to be read.
+     * @param tableName - the name of the table that is going to be created.
      */
-    protected void importFile() {
+    protected void startReadingFile(File readFile, String tableName) {
         try {
-            in = new BufferedReader(new FileReader(fileName + ".xls"));
+            in = new BufferedReader(new FileReader(readFile.toString()));
             JOptionPane.showMessageDialog(
             				null, "The table was imported!");
-            Table table = new Table(fileName);
+            Table table = new Table(tableName);
             Database.getDatabaseInstance().addTable(table);
             String line;
             int linesRead = 0;
@@ -84,7 +111,8 @@ public class TransferData {
                 	linesRead++;
                 	if (linesRead == 1) {
                 		//do nothing
-                		//this is the key
+                		//the first line includes only the key.
+                		//this is used symbolic to mark files.
                 	}
                     ArrayList<Object> entryArguments = new ArrayList<Object>();
                     StringTokenizer st = new StringTokenizer(line, "\t");
@@ -110,13 +138,36 @@ public class TransferData {
     }
 
     /**
-     * Exports a table to an .xls file.
+     * Allows the user to save a .xls file that contains a table's data
+     * to a preferred destination in their computer.
+     * @param frame - the JFrame where the FileChooser will be displayed.
      * @param table - the table to be exported
      */
-    protected void exportFile(Table table) {
+    protected File exportFile(JFrame frame,Table table) {
+        jfc = new JFileChooser();
+        jfc.setSelectedFile(new File(fileName + ".xls"));
+        jfc.setAcceptAllFileFilterUsed(false);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files" ,".xls");
+		jfc.addChoosableFileFilter(filter);
+        File destination = null;
+		int save = jfc.showSaveDialog(frame);
+        if (save == JFileChooser.APPROVE_OPTION) {
+        	destination = jfc.getSelectedFile();
+        } else {
+        	JOptionPane.showMessageDialog(frame, "You have canceled the export!");
+        }
+        return destination;
+
+    }
+
+    /** Writes the data of a Table to the selected .xls file.
+     * @param table - the data to be written.
+     * @param destination - the .xls file where the data are going
+     * to be written in. */
+    protected void startWritingFile(Table table,File destination) {
         try {
             FileWriter outFile =
-                    new FileWriter(fileName + ".xls", false);
+                    new FileWriter(destination.toString(), false);
             PrintWriter out = new PrintWriter(outFile);
             out.println(uniqueKeyIdentifier); //key
             for (int i = 0; i < table.numberOfFields(); i++) {
@@ -130,12 +181,19 @@ public class TransferData {
                 out.println();
             }
             out.close();
+        	JOptionPane.showMessageDialog(null, "The table was exported!\n"
+        					+ "The Key Identifier is: "
+        					+ uniqueKeyIdentifier);
+        	JOptionPane.showMessageDialog(null,
+        		    "The Key Identifier is used "
+        		    + "to mark every file created by this database.");
         } catch (IOException e) {
            JOptionPane.showMessageDialog(null, e.toString());
         }
-    }
 
-    public String getFileName() {
+	}
+
+	public String getFileName() {
         return fileName;
     }
 

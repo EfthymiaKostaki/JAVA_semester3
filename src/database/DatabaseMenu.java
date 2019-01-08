@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.Date;
 
@@ -141,14 +142,15 @@ public class DatabaseMenu extends Menu {
 	 * {@link database.TransferData#importFile(). */
 	private void importTableButtonActionPerformed(ActionEvent e) {
 	    super.refresh(sidePanel);
-	    String importFile = JOptionPane.showInputDialog("Import an Excel file:"
-	                    + "\n"
-	                    + "*Note: Do NOT add .xls extension");
-	    if (Standards.isNameValid(importFile)) {
-	        TransferData transfer = new TransferData(importFile);
-	        if (transfer.checkForUniqueKeyIdentifier()) {
-	        	transfer.importFile();
-	        }
+	    TransferData transfer = new TransferData();
+	    File selectedFile = transfer.importFile(this);
+	    if (selectedFile != null) {
+	    	if (transfer.checkForUniqueKeyIdentifier(selectedFile)) {
+	    		String name = selectedFile.getName();
+	    		//remove the file extension
+	    		name = name.replaceFirst("[.][^.]+$", "");
+	    		transfer.startReadingFile(selectedFile, name);
+	    	}
 	    }
 	}
 
