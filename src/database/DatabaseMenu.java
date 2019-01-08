@@ -75,7 +75,7 @@ public class DatabaseMenu extends Menu {
 		String username = System.getProperty("user.name");
 		welcomeLabel = new JLabel("Welcome " + username);
 
-		dateLabel = new JLabel("<html>Last access at:"
+		dateLabel = new JLabel("<html>Accessed at:"
 				+ "<br/>" + new Date().toString() + "</html>");
 
 		importTableButton = new JButton("Import a Table");
