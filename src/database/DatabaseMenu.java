@@ -145,9 +145,10 @@ public class DatabaseMenu extends Menu {
 	                    + "\n"
 	                    + "*Note: Do NOT add .xls extension");
 	    if (Standards.isNameValid(importFile)) {
-	    	JOptionPane.showMessageDialog(null, "The table was imported!");
 	        TransferData transfer = new TransferData(importFile);
-	        transfer.importFile();
+	        if (transfer.checkForUniqueKeyIdentifier()) {
+	        	transfer.importFile();
+	        }
 	    }
 	}
 
