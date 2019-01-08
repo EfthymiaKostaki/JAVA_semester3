@@ -137,19 +137,21 @@ public class DatabaseMenu extends Menu {
 	    URL url = getClass().getResource(icon);
 	    return toolkit.getImage(url);
 	}
-
-	/**Allows the user to import a Table
+	
+    /**Allows the user to import a Table
 	 * {@link database.TransferData#importFile(). */
 	private void importTableButtonActionPerformed(ActionEvent e) {
 	    super.refresh(sidePanel);
 	    TransferData transfer = new TransferData();
 	    File selectedFile = transfer.importFile(this);
 	    if (selectedFile != null) {
-	    	if (transfer.checkForUniqueKeyIdentifier(selectedFile)) {
-	    		String name = selectedFile.getName();
-	    		//remove the file extension
-	    		name = name.replaceFirst("[.][^.]+$", "");
-	    		transfer.startReadingFile(selectedFile, name);
+	    	String name = selectedFile.getName();
+	    	//remove the file extension
+	    	name = name.replaceFirst("[.][^.]+$", "");
+	    	if (Database.getDatabaseInstance().checkForDuplicateTables(name)) {
+	    		if (transfer.checkForUniqueKeyIdentifier(selectedFile)) {
+	    			transfer.startReadingFile(selectedFile, name);
+	    		}
 	    	}
 	    }
 	}
