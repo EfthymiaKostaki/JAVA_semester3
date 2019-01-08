@@ -176,9 +176,14 @@ public class TableMenu extends Menu {
     private void exportButtonActionPerformed(ActionEvent e) {
         //there is no reason to export an empty table.
     	if(table.isThereAnyField()) {
-    		JOptionPane.showMessageDialog(null, "The table was exported!");
         	TransferData transfer = new TransferData(table.toString());
         	transfer.exportFile(table);
+        	JOptionPane.showMessageDialog(null, "The table was exported!\n"
+        					+ "The Key Identifier is: "
+        					+ transfer.uniqueKeyIdentifier);
+        	JOptionPane.showMessageDialog(null,
+        		    "The Key Identifier is used"
+        		    + "to mark every file created by this database.");
         } else {
         	JOptionPane.showMessageDialog(
         		    null, "You cannot export an empty table!");
